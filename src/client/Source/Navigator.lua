@@ -6,37 +6,39 @@ function NavigationEnd.New(Library)
 
 	Self.Library = Library
 	Self.Body = nil
+	Self.BodyCollection = {}
 
 	return Self
 end
 
 function NavigationEnd:Init(EndData)
 	local Methods = {}
+	local Library = self.Library
 
-	assert(self.Library, "No Library found")
+	assert(Library, "No Library found")
 
-	local SignalHandler = self.Library.SignalHandler
-	local AnimHandler = self.Library.AnimationHandler
-	local InstanceHandler = self.Library.InstanceHandler
+	local SignalHandler = Library.SignalHandler
+	local AnimHandler = Library.AnimationHandler
+	local InstanceHandler = Library.InstanceHandler
 	local New = InstanceHandler.NewInstance
 
-	local NavigationBar = New("Frame")
-	local UIListLayout_1 = New("UIListLayout")
-	local Left_1 = New("Frame")
-	local UIListLayout_2 = New("UIListLayout")
-	local UIPadding_1 = New("UIPadding")
-	local Center_1 = New("Frame")
-	local Bar_1 = New("ImageButton")
-	local UICorner_2 = New("UICorner")
-	local UIListLayout_5 = New("UIListLayout")
-	local UIPadding_3 = New("UIPadding")
-	local UIPadding_10 = New("UIPadding")
-	local Right_1 = New("Frame")
-	local UIListLayout_12 = New("UIListLayout")
-	local UIPadding_11 = New("UIPadding")
-	local UIStroke_4 = New("UIStroke")
-	local TagZone_1 = New("Frame")
-	local UIListLayout_13 = New("UIListLayout")
+	local NavigationBar = Instance.new("Frame")
+	local UIListLayout_1 = Instance.new("UIListLayout")
+	local Left_1 = Instance.new("Frame")
+	local UIListLayout_2 = Instance.new("UIListLayout")
+	local UIPadding_1 = Instance.new("UIPadding")
+	local Center_1 = Instance.new("Frame")
+	local Bar_1 = Instance.new("ImageButton")
+	local UICorner_2 = Instance.new("UICorner")
+	local UIListLayout_5 = Instance.new("UIListLayout")
+	local UIPadding_3 = Instance.new("UIPadding")
+	local UIPadding_10 = Instance.new("UIPadding")
+	local Right_1 = Instance.new("Frame")
+	local UIListLayout_12 = Instance.new("UIListLayout")
+	local UIPadding_11 = Instance.new("UIPadding")
+	local UIStroke_4 = Instance.new("UIStroke")
+	local TagZone_1 = Instance.new("Frame")
+	local UIListLayout_13 = Instance.new("UIListLayout")
 
 	self.Body = NavigationBar
 
@@ -167,7 +169,7 @@ function NavigationEnd:Init(EndData)
 
 	local Selected = nil
 	function Methods:CreateTab(Data)
-		local Methods = {}
+		local New = {}
 
 		assert(shared.Window, "No Window Found")
 		local Window = shared.Window
@@ -177,16 +179,16 @@ function NavigationEnd:Init(EndData)
 			SearchBarEnabled = true,
 		})
 
-		local Tab_1 = New("ImageButton")
-		local UICorner_3 = New("UICorner")
-		local UIStroke_2 = New("UIStroke")
-		local Icon_2 = New("ImageLabel")
-		local Identifier_1 = New("ImageButton")
-		local UICorner_4 = New("UICorner")
-		local Title_2 = New("TextLabel")
-		local UIListLayout_6 = New("UIListLayout")
-		local UIPadding_4 = New("UIPadding")
-		local UIStroke_3 = New("UIStroke")
+		local Tab_1 = Instance.new("ImageButton")
+		local UICorner_3 = Instance.new("UICorner")
+		local UIStroke_2 = Instance.new("UIStroke")
+		local Icon_2 = Instance.new("ImageLabel")
+		local Identifier_1 = Instance.new("ImageButton")
+		local UICorner_4 = Instance.new("UICorner")
+		local Title_2 = Instance.new("TextLabel")
+		local UIListLayout_6 = Instance.new("UIListLayout")
+		local UIPadding_4 = Instance.new("UIPadding")
+		local UIStroke_3 = Instance.new("UIStroke")
 
 		local function HandleSelection(Bool, Tab)
 			assert(Tab, "Tab is nil for 'HandleSelection'")
@@ -252,7 +254,7 @@ function NavigationEnd:Init(EndData)
 		Icon_2.BackgroundTransparency = 1
 		Icon_2.Position = UDim2.new(0.5, 0, 0.5, 0)
 		Icon_2.Size = UDim2.new(0, 27, 0, 27)
-		Icon_2.Image = "rbxassetid://10734975692"
+		Icon_2.Image = Library:GetLucideIcon(Data.Icon)
 		Icon_2.ImageTransparency = 0.3
 
 		Identifier_1.Name = "Identifier"
@@ -310,11 +312,11 @@ function NavigationEnd:Init(EndData)
 			{ Transparency = 1 }
 		)
 
-		AnimHandler:Animate(
-			Identifier_1,
-			TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-			{ Position = UDim2.new(0.5, 0, -0.8, 0), BackgroundTransparency = 1, ImageTransparency = 1 }
-		)
+		AnimHandler:Animate(Identifier_1, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			Position = UDim2.new(0.5, 0, -0.8, 0),
+			BackgroundTransparency = 1,
+			ImageTransparency = 1,
+		})
 
 		AnimHandler:Animate(
 			Identifier_1:FindFirstChild("Title"),
@@ -331,12 +333,14 @@ function NavigationEnd:Init(EndData)
 		--// Selection Handling
 		SignalHandler:NewSignal(Tab_1, "MouseButton1Click", function()
 			if Selected and Selected ~= Tab_1 then
+				Window:Enter()
 				HandleSelection(false, Selected)
 				HandleSelection(true, Tab_1)
 
-				Window:Change(Tab_1.Name or "")
+				Window:Change(Tab_1.Name or Data.Name or Data.Title or nil)
 			elseif not Selected then
 				HandleSelection(true, Tab_1)
+				Window:Enter()
 			else
 				HandleSelection(false, Tab_1)
 				Selected = nil
@@ -360,11 +364,11 @@ function NavigationEnd:Init(EndData)
 				)
 			end
 
-			AnimHandler:Animate(
-				Identifier_1,
-				TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-				{ Position = UDim2.new(0.5, 0, -0.888, 0), BackgroundTransparency = 0.15, ImageTransparency = 0.95 }
-			)
+			AnimHandler:Animate(Identifier_1, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				Position = UDim2.new(0.5, 0, -0.888, 0),
+				BackgroundTransparency = 0.15,
+				ImageTransparency = 0.95,
+			})
 
 			AnimHandler:Animate(
 				Identifier_1:FindFirstChild("Title"),
@@ -393,11 +397,11 @@ function NavigationEnd:Init(EndData)
 				)
 			end
 
-			AnimHandler:Animate(
-				Identifier_1,
-				TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-				{ Position = UDim2.new(0.5, 0, -0.8, 0), BackgroundTransparency = 1, ImageTransparency = 1 }
-			)
+			AnimHandler:Animate(Identifier_1, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				Position = UDim2.new(0.5, 0, -0.8, 0),
+				BackgroundTransparency = 1,
+				ImageTransparency = 1,
+			})
 
 			AnimHandler:Animate(
 				Identifier_1:FindFirstChild("Title"),
@@ -413,27 +417,38 @@ function NavigationEnd:Init(EndData)
 		end)
 
 		--// Methods
-		function Methods:Select()
+		function New:Select()
 			HandleSelection(true, Tab_1)
 		end
 
-		function Methods:UnSelect()
+		function New:UnSelect()
 			HandleSelection(false, Tab_1)
 		end
 
 		--// Window Methods
-		function Methods:CreateToggle(Data)
+		function New:CreateToggle(Data)
 			WindowContext:NewToggle({
-				Title = Data.Title or Data.Name,
-				Description = Data.Description or Data.Desc,
-				Default = Data.Default or Data.DefaultaValue,
+				Title = Data.Title or Data.Name or "",
+				Icon = Library:GetLucideIcon(Data.Icon or ""),
+				Description = Data.Description or Data.Desc or "",
+				Default = Data.Default or Data.DefaultaValue or false,
 				Callback = Data.Callback,
 			})
 		end
 
-		function Methods:CreateSlider(Data)
+		function New:CreateButton(Data)
+			WindowContext:NewButton({
+				Title = Data.Title or Data.Name or "",
+				Icon = Library:GetLucideIcon(Data.Icon or ""),
+				Description = Data.Description or Data.Desc or "",
+				Callback = Data.Callback,
+			})
+		end
+
+		function New:CreateSlider(Data)
 			WindowContext:NewSlider({
 				Title = Data.Title or Data.Name,
+				Icon = Library:GetLucideIcon(Data.Icon or ""),
 				Description = Data.Description or Data.Desc,
 				MinValue = Data.MinValue or Data.Min,
 				MaxValue = Data.MaxValue or Data.Max,
@@ -443,7 +458,7 @@ function NavigationEnd:Init(EndData)
 			})
 		end
 
-		return Methods
+		return New
 	end
 
 	return Methods

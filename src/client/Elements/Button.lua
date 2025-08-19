@@ -1,8 +1,8 @@
-local Slider = {}
-Slider.__index = Slider
+local Button = {}
+Button.__index = Button
 
-function Slider.New(Library, Body)
-	local Self = setmetatable({}, Slider)
+function Button.New(Library, Body)
+	local Self = setmetatable({}, Button)
 
 	Self.Library = Library
 	Self.Body = Body
@@ -11,14 +11,14 @@ function Slider.New(Library, Body)
 	return Self
 end
 
-function Slider:Init(Data)
+function Button:Init(Data)
 	local Library = self.Library
 	assert(Library, "No library found for '" .. (Data.Title or "Slider") .. ", ended thread")
 
 	local SignalHandler = Library.SignalHandler
 	local AnimHandler = Library.AnimationHandler
 
-	local Slider = Instance.new("Frame")
+	local Button = Instance.new("TextButton")
 	local Displays = Instance.new("Frame")
 	local IconHolder = Instance.new("Frame")
 	local Icon = Instance.new("ImageLabel")
@@ -28,31 +28,27 @@ function Slider:Init(Data)
 	local Display = Instance.new("TextLabel")
 	local Description = Instance.new("TextLabel")
 	local UIListLayout_2 = Instance.new("UIListLayout")
-	local SliderHolder = Instance.new("Frame")
+	local ButtonHolder = Instance.new("Frame")
 	local UIListLayout_3 = Instance.new("UIListLayout")
-	local SliderBar = Instance.new("Frame")
+	local Button_2 = Instance.new("ImageButton")
 	local UICorner_2 = Instance.new("UICorner")
-	local ProgressBar = Instance.new("Frame")
-	local UICorner_3 = Instance.new("UICorner")
-	local Dot = Instance.new("Frame")
-	local UICorner_4 = Instance.new("UICorner")
-	local Value = Instance.new("TextLabel")
-	local UICorner_5 = Instance.new("UICorner")
 	local UIPadding = Instance.new("UIPadding")
 	local UIListLayout_4 = Instance.new("UIListLayout")
 
-	Slider.Name = "Slider"
-	Slider.Parent = self.Body
-	Slider.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-	Slider.BackgroundTransparency = 0.400
-	Slider.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Slider.BorderSizePixel = 0
-	Slider.Position = UDim2.new(0.0259433966, 0, 0, 0)
-	Slider.Size = UDim2.new(0.930000007, 0, 0, 0)
-	Slider.AutomaticSize = Enum.AutomaticSize.Y
+	Button.Name = "Button"
+	Button.Parent = self.Body
+	Button.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	Button.BackgroundTransparency = 0.400
+	Button.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Button.BorderSizePixel = 0
+	Button.Position = UDim2.new(0.0259433966, 0, 0, 0)
+	Button.Text = ""
+	Button.Size = UDim2.new(0.930000007, 0, 0, 0)
+	Button.AutomaticSize = Enum.AutomaticSize.Y
+	Button.AutoButtonColor = false
 
 	Displays.Name = "Displays"
-	Displays.Parent = Slider
+	Displays.Parent = Button
 	Displays.AnchorPoint = Vector2.new(0, 0.5)
 	Displays.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Displays.BackgroundTransparency = 1.000
@@ -70,7 +66,6 @@ function Slider:Init(Data)
 	IconHolder.BorderSizePixel = 0
 	IconHolder.Position = UDim2.new(0, 0, 0.5, 0)
 	IconHolder.Size = UDim2.new(0, 50, 0, 50)
-	IconHolder.Visible = false
 
 	Icon.Name = "Icon"
 	Icon.Parent = IconHolder
@@ -113,13 +108,12 @@ function Slider:Init(Data)
 	Display.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Display.BorderSizePixel = 0
 	Display.Position = UDim2.new(0, 0, 0.363013685, 0)
-	Display.Size = UDim2.new(1, 0, 0, 17)
+	Display.Size = UDim2.new(0, 68, 0, 17)
 	Display.FontFace = Library.Font
-	Display.Text = Data.Title
+	Display.Text = Data.Title or ""
 	Display.TextColor3 = Color3.fromRGB(220, 220, 220)
 	Display.TextSize = 18.000
 	Display.TextXAlignment = Enum.TextXAlignment.Left
-	Display.AutomaticSize = Enum.AutomaticSize.Y
 
 	SignalHandler:HandleNil(Display)
 
@@ -132,7 +126,7 @@ function Slider:Init(Data)
 	Description.Position = UDim2.new(0, 0, 0.5, 0)
 	Description.Size = UDim2.new(1, 0, 0, 0)
 	Description.Font = Enum.Font.GothamMedium
-	Description.Text = Data.Description
+	Description.Text = Data.Description or ""
 	Description.TextColor3 = Color3.fromRGB(180, 180, 180)
 	Description.TextSize = 16.000
 	Description.TextWrapped = true
@@ -148,104 +142,74 @@ function Slider:Init(Data)
 	UIListLayout_2.VerticalAlignment = Enum.VerticalAlignment.Center
 	UIListLayout_2.Padding = UDim.new(0, 10)
 
-	SliderHolder.Name = "SliderHolder"
-	SliderHolder.Parent = Slider
-	SliderHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	SliderHolder.BackgroundTransparency = 1.000
-	SliderHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	SliderHolder.BorderSizePixel = 0
-	SliderHolder.LayoutOrder = 1
-	SliderHolder.Position = UDim2.new(0, 0, 0.820895493, 0)
-	SliderHolder.Size = UDim2.new(0, 372, 0, 0)
-	SliderBar.AutomaticSize = Enum.AutomaticSize.Y
+	ButtonHolder.Name = "ButtonHolder"
+	ButtonHolder.Parent = Button
+	ButtonHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	ButtonHolder.BackgroundTransparency = 1.000
+	ButtonHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	ButtonHolder.BorderSizePixel = 0
+	ButtonHolder.LayoutOrder = 1
+	ButtonHolder.Position = UDim2.new(0.931026936, 0, 0, 0)
+	ButtonHolder.Size = UDim2.new(0, 24, 0, 54)
 
-	UIListLayout_3.Parent = SliderHolder
-	UIListLayout_3.FillDirection = Enum.FillDirection.Horizontal
+	UIListLayout_3.Parent = ButtonHolder
+	UIListLayout_3.HorizontalAlignment = Enum.HorizontalAlignment.Right
 	UIListLayout_3.SortOrder = Enum.SortOrder.LayoutOrder
-	UIListLayout_3.VerticalAlignment = Enum.VerticalAlignment.Bottom
-	UIListLayout_3.HorizontalFlex = Enum.UIFlexAlignment.Fill
+	UIListLayout_3.VerticalAlignment = Enum.VerticalAlignment.Center
 
-	SliderBar.Name = "SliderBar"
-	SliderBar.Parent = SliderHolder
-	SliderBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	SliderBar.BackgroundTransparency = 0.900
-	SliderBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	SliderBar.BorderSizePixel = 0
-	SliderBar.Position = UDim2.new(0, 0, 0.785714269, 0)
-	SliderBar.Size = UDim2.new(0, 277, 0, 6)
+	Button_2.Name = "Button"
+	Button_2.Parent = ButtonHolder
+	Button_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Button_2.BackgroundTransparency = 1.000
+	Button_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Button_2.BorderSizePixel = 0
+	Button_2.Size = UDim2.new(0, 29, 0, 29)
+	Button_2.Image = "rbxassetid://10709791437"
+	Button_2.ImageColor3 = Color3.fromRGB(180, 180, 180)
 
-	UICorner_2.CornerRadius = UDim.new(1, 0)
-	UICorner_2.Parent = SliderBar
+	UICorner_2.CornerRadius = UDim.new(0, 20)
+	UICorner_2.Parent = Button
 
-	ProgressBar.Name = "ProgressBar"
-	ProgressBar.Parent = SliderBar
-	ProgressBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	ProgressBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	ProgressBar.BorderSizePixel = 0
-	ProgressBar.Size = UDim2.new(0.600000024, 0, 1, 0)
-
-	UICorner_3.CornerRadius = UDim.new(1, 0)
-	UICorner_3.Parent = ProgressBar
-
-	Dot.Parent = ProgressBar
-	Dot.Active = true
-	Dot.AnchorPoint = Vector2.new(1, 0.5)
-	Dot.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Dot.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Dot.BorderSizePixel = 0
-	Dot.Position = UDim2.new(1, 0, 0.5, 0)
-	Dot.Size = UDim2.new(0, 10, 0, 10)
-
-	UICorner_4.CornerRadius = UDim.new(1, 0)
-	UICorner_4.Parent = Dot
-
-	Value.Name = "Description"
-	Value.Parent = SliderHolder
-	Value.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Value.BackgroundTransparency = 1.000
-	Value.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Value.BorderSizePixel = 0
-	Value.Position = UDim2.new(0.744623661, 0, 0.428571433, 0)
-	Value.Font = Enum.Font.GothamMedium
-	Value.Text = "100"
-	Value.TextColor3 = Color3.fromRGB(180, 180, 180)
-	Value.TextSize = 16.000
-	Value.TextWrapped = true
-	Value.TextXAlignment = Enum.TextXAlignment.Right
-	Value.TextYAlignment = Enum.TextYAlignment.Top
-	Value.AutomaticSize = Enum.AutomaticSize.XY
-
-	UICorner_5.CornerRadius = UDim.new(0, 20)
-	UICorner_5.Parent = Slider
-
-	UIPadding.Parent = Slider
+	UIPadding.Parent = Button
 	UIPadding.PaddingBottom = UDim.new(0, 15)
 	UIPadding.PaddingLeft = UDim.new(0, 15)
 	UIPadding.PaddingRight = UDim.new(0, 15)
 	UIPadding.PaddingTop = UDim.new(0, 15)
 
-	UIListLayout_4.Parent = Slider
+	UIListLayout_4.Parent = Button
+	UIListLayout_4.FillDirection = Enum.FillDirection.Horizontal
 	UIListLayout_4.SortOrder = Enum.SortOrder.LayoutOrder
 	UIListLayout_4.VerticalAlignment = Enum.VerticalAlignment.Center
+	UIListLayout_4.HorizontalFlex = Enum.UIFlexAlignment.Fill
 
 	local ManualStroke = Instance.new("UIStroke")
-	ManualStroke.Parent = Slider
+	ManualStroke.Parent = Button
 	ManualStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 	ManualStroke.Transparency = 0.9
 	ManualStroke.Color = Color3.fromRGB(255, 255, 255)
 
-	SignalHandler:HandleChange(Displays, SliderHolder)
-
-	--// Setup
 	local Callback = Data.Callback
-	local Min = Data.Min
-	local Max = Data.Max
-	local Step = Data.Step
-	local Default = Data.Default or Min
+	--// assert(Callback, "No callback for '".. Displays.Text .. "', ended thread")
 
-	SignalHandler:NewClickSignal(SliderBar, function()
-		--//TODO: Implement Slider Logic
+	SignalHandler:HandleChange(Displays, ButtonHolder)
+
+	SignalHandler:NewSignal(Button, "MouseButton1Click", function()
+		SignalHandler:SafeCallback(Callback, nil, Data.Title)
 	end)
+
+	return {
+		SetDescription = function(Text)
+			Description.Text = Text
+		end,
+
+		SetTitle = function(Text)
+			Display.Text = Text
+		end,
+
+		Callback = function(Bool)
+			SignalHandler:SafeCallback(Callback, nil, Data.Title)
+		end,
+	}
 end
 
-return Slider
+return Button

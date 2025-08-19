@@ -3,7 +3,7 @@ local Library = require(script.Parent:WaitForChild("Init"))
 local Navigator = Library:Setup({
 	Window = {
 		Title = "Window Example",
-		Logo = "",
+		Logo = "user",
 		Size = nil, --// Default: offset 425, 520
 	},
 
@@ -14,17 +14,17 @@ local Navigator = Library:Setup({
 
 local CombatTab = Navigator:CreateTab({
 	Title = "Combat Tab And Utilities",
-	Icon = "",
+	Icon = "Info",
 })
 
 local CombatT22222222ab = Navigator:CreateTab({
 	Title = "Combat Tab And Skids",
-	Icon = "",
+	Icon = "Sword",
 })
 
 local Co2mbatTab = Navigator:CreateTab({
 	Title = "Combat Tab And Pasters",
-	Icon = "",
+	Icon = "User",
 })
 
 CombatTab:Select()
@@ -33,7 +33,18 @@ CombatTab:CreateToggle({
 	Title = "Toggle Exmaple",
 	Description = "This is an example toggle",
 	Default = false,
-	Callback = function() end,
+	Callback = function(Bool)
+		print(Bool)
+	end,
+})
+
+CombatTab:CreateButton({
+	Title = "Button Example",
+	Icon = "clock",
+	Description = "This is an example Button",
+	Callback = function()
+		print("clicked button")
+	end,
 })
 
 CombatTab:CreateSlider({

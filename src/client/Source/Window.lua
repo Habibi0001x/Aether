@@ -7,6 +7,7 @@ function Window.New(Library)
 	Self.Library = Library
 	Self.Resizable = false
 	Self.Body = nil
+	Self.BodyCollection = {}
 	Self.Size = UDim2.fromOffset(425, 520)
 
 	return Self
@@ -15,783 +16,60 @@ end
 function Window:Init(DataEnd)
 	local Methods = {}
 
-	local SignalHandler = self.Library.SignalHandler
-	local AnimHandler = self.Library.AnimationHandler
-	local InstanceHandler = self.Library.InstanceHandler
-	local New = InstanceHandler.NewInstance
+	--// Modules
+	local Library = self.Library
+	local SignalHandler = Library.SignalHandler
+	local AnimHandler = Library.AnimationHandler
+
+	--// Element Modules
+	local ToggleModule = require(script.Parent.Parent:WaitForChild("Elements"):WaitForChild("Toggle"))
+	local ButtonModule = require(script.Parent.Parent:WaitForChild("Elements"):WaitForChild("Button"))
+	local SliderModule = require(script.Parent.Parent:WaitForChild("Elements"):WaitForChild("Slider"))
 
 	assert(SignalHandler, "No signal handler found for 'Init'")
 	assert(AnimHandler, "No animation handler found for 'Init'")
-	assert(New, "'New' Method is nil")
 
-	local Window = New("ImageButton")
-	local UICorner_1 = New("UICorner")
-	local UIStroke_1 = New("UIStroke")
-	local TopBar_1 = New("Frame")
-	local Header_1 = New("Frame")
-	local Title_1 = New("ImageButton")
-	local UICorner_2 = New("UICorner")
-	local UIListLayout_1 = New("UIListLayout")
-	local UIPadding_1 = New("UIPadding")
-	local UIStroke_2 = New("UIStroke")
-	local Title_2 = New("TextLabel")
-	local Icon_1 = New("ImageLabel")
-	local UIListLayout_2 = New("UIListLayout")
-	local UIPadding_2 = New("UIPadding")
-	local UIListLayout_3 = New("UIListLayout")
-	local ButtonZones_1 = New("Frame")
-	local Button_1 = New("ImageButton")
-	local UICorner_3 = New("UICorner")
-	local UIListLayout_4 = New("UIListLayout")
-	local UIPadding_3 = New("UIPadding")
-	local UIStroke_3 = New("UIStroke")
-	local Icon_2 = New("ImageLabel")
-	local Button_2 = New("ImageButton")
-	local UICorner_4 = New("UICorner")
-	local UIListLayout_5 = New("UIListLayout")
-	local UIPadding_4 = New("UIPadding")
-	local UIStroke_4 = New("UIStroke")
-	local Icon_3 = New("ImageLabel")
-	local Button_3 = New("ImageButton")
-	local UICorner_5 = New("UICorner")
-	local UIListLayout_6 = New("UIListLayout")
-	local UIPadding_5 = New("UIPadding")
-	local UIStroke_5 = New("UIStroke")
-	local Icon_4 = New("ImageLabel")
-	local UIPadding_6 = New("UIPadding")
-	local UIListLayout_7 = New("UIListLayout")
-	local Container_1 = New("ScrollingFrame")
-
-	function Methods:NewContext(Iden)
-		local Elements = {}
-
-		local ElemContainer_1 = New("ScrollingFrame")
-		local UIListLayout_8 = New("UIListLayout")
-		local SearchBar = New("ImageButton")
-		local UICorner_15 = New("UICorner")
-		local UIListLayout_17 = New("UIListLayout")
-		local UIPadding_10 = New("UIPadding")
-		local UIStroke_9 = New("UIStroke")
-		local Title_4 = New("TextLabel")
-		local Icon_7 = New("ImageLabel")
-		local Display_3 = New("TextLabel")
-		local Dropdown_1 = New("Frame")
-		local Displays_3 = New("Frame")
-		local IconHolder_3 = New("Frame")
-		local Icon_8 = New("ImageLabel")
-		local UICorner_16 = New("UICorner")
-		local Text_3 = New("Frame")
-		local UIListLayout_18 = New("UIListLayout")
-		local Display_4 = New("TextLabel")
-		local Description_4 = New("TextLabel")
-		local UIListLayout_19 = New("UIListLayout")
-		local DropdownHolder_1 = New("Frame")
-		local UIListLayout_20 = New("UIListLayout")
-		local Dropdown_2 = New("Frame")
-		local Title_5 = New("TextLabel")
-		local Icon_9 = New("ImageLabel")
-		local UIListLayout_21 = New("UIListLayout")
-		local UIPadding_11 = New("UIPadding")
-		local UIStroke_10 = New("UIStroke")
-		local UICorner_17 = New("UICorner")
-		local UISizeConstraint_1 = New("UISizeConstraint")
-		local UIStroke_11 = New("UIStroke")
-		local UICorner_18 = New("UICorner")
-		local UIPadding_12 = New("UIPadding")
-		local UIListLayout_22 = New("UIListLayout")
-		local Button_4 = New("Frame")
-		local Displays_4 = New("Frame")
-		local IconHolder_4 = New("Frame")
-		local Icon_10 = New("ImageLabel")
-		local UICorner_19 = New("UICorner")
-		local Text_4 = New("Frame")
-		local UIListLayout_23 = New("UIListLayout")
-		local Display_5 = New("TextLabel")
-		local Description_5 = New("TextLabel")
-		local UIListLayout_24 = New("UIListLayout")
-		local DropdownHolder_2 = New("Frame")
-		local UIListLayout_25 = New("UIListLayout")
-		local Button_5 = New("ImageButton")
-		local UIStroke_12 = New("UIStroke")
-		local UICorner_20 = New("UICorner")
-		local UIPadding_13 = New("UIPadding")
-		local UIListLayout_26 = New("UIListLayout")
-		local UIListLayout_27 = New("UIListLayout")
-		local Paragraph_1 = New("Frame")
-		local Displays_5 = New("Frame")
-		local IconHolder_5 = New("Frame")
-		local Icon_11 = New("ImageLabel")
-		local UICorner_21 = New("UICorner")
-		local Text_5 = New("Frame")
-		local UIListLayout_28 = New("UIListLayout")
-		local Display_6 = New("TextLabel")
-		local Description_6 = New("TextLabel")
-		local UIListLayout_29 = New("UIListLayout")
-		local UIStroke_13 = New("UIStroke")
-		local UICorner_22 = New("UICorner")
-		local UIPadding_14 = New("UIPadding")
-		local UIListLayout_30 = New("UIListLayout")
-		local Buttons_1 = New("Frame")
-		local UIListLayout_31 = New("UIListLayout")
-		local List_1 = New("ScrollingFrame")
-		local UIListLayout_32 = New("UIListLayout")
-		local UIPadding_15 = New("UIPadding")
-		local UIListLayout_33 = New("UIListLayout")
-		local UIListLayout_34 = New("UIListLayout")
-
-		ElemContainer_1.Name = Iden.Title
-		ElemContainer_1.Parent = Container_1
-		ElemContainer_1.Active = true
-		ElemContainer_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		ElemContainer_1.BackgroundTransparency = 1
-		ElemContainer_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		ElemContainer_1.BorderSizePixel = 0
-		ElemContainer_1.Size = UDim2.new(1, 0, 1, 0)
-		ElemContainer_1.ClipsDescendants = true
-		ElemContainer_1.AutomaticCanvasSize = Enum.AutomaticSize.Y
-		ElemContainer_1.BottomImage = "rbxasset://textures/ui/Scroll/scroll-bottom.png"
-		ElemContainer_1.CanvasPosition = Vector2.new(0, 0)
-		ElemContainer_1.CanvasSize = UDim2.new(0, 0, 0, 0)
-		ElemContainer_1.ElasticBehavior = Enum.ElasticBehavior.WhenScrollable
-		ElemContainer_1.HorizontalScrollBarInset = Enum.ScrollBarInset.None
-		ElemContainer_1.MidImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-		ElemContainer_1.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
-		ElemContainer_1.ScrollBarImageTransparency = 0
-		ElemContainer_1.ScrollBarThickness = 0
-		ElemContainer_1.ScrollingDirection = Enum.ScrollingDirection.XY
-		ElemContainer_1.TopImage = "rbxasset://textures/ui/Scroll/scroll-top.png"
-		ElemContainer_1.VerticalScrollBarInset = Enum.ScrollBarInset.None
-		ElemContainer_1.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Right
-
-		UIListLayout_8.Parent = ElemContainer_1
-		UIListLayout_8.Padding = UDim.new(0, 8)
-		UIListLayout_8.HorizontalAlignment = Enum.HorizontalAlignment.Center
-		UIListLayout_8.SortOrder = Enum.SortOrder.LayoutOrder
-
-		SearchBar.Name = "Title"
-		SearchBar.Parent = ElemContainer_1
-		SearchBar.Active = true
-		SearchBar.AnchorPoint = Vector2.new(0.5, 0.5)
-		SearchBar.AutoButtonColor = false
-		SearchBar.AutomaticSize = Enum.AutomaticSize.X
-		SearchBar.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-		SearchBar.BackgroundTransparency = 0.10000000149011612
-		SearchBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		SearchBar.BorderSizePixel = 0
-		SearchBar.LayoutOrder = -1
-		SearchBar.Modal = true
-		SearchBar.Position = UDim2.new(0.48815167, 0, 0.0359628759, 0)
-		SearchBar.Size = UDim2.new(0.939999998, 0, 0, 45)
-		SearchBar.Image = "rbxassetid://16255699706"
-		SearchBar.ImageTransparency = 0.949999988079071
-		SearchBar.ScaleType = Enum.ScaleType.Crop
-
-		UICorner_15.Parent = SearchBar
-		UICorner_15.CornerRadius = UDim.new(1, 0)
-
-		UIListLayout_17.Parent = SearchBar
-		UIListLayout_17.Padding = UDim.new(0, 7)
-		UIListLayout_17.FillDirection = Enum.FillDirection.Horizontal
-		UIListLayout_17.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_17.VerticalAlignment = Enum.VerticalAlignment.Center
-
-		UIPadding_10.Parent = SearchBar
-		UIPadding_10.PaddingLeft = UDim.new(0, 12)
-		UIPadding_10.PaddingRight = UDim.new(0, 12)
-
-		UIStroke_9.Parent = SearchBar
-		UIStroke_9.Color = Color3.fromRGB(255, 255, 255)
-		UIStroke_9.Thickness = 1
-
-		Title_4.Name = "Title"
-		Title_4.Parent = SearchBar
-		Title_4.AutomaticSize = Enum.AutomaticSize.X
-		Title_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Title_4.BackgroundTransparency = 1.0099999904632568
-		Title_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Title_4.BorderSizePixel = 0
-		Title_4.LayoutOrder = 1
-		Title_4.Size = UDim2.new(0, 0, 1, 0)
-		Title_4.Font = Enum.Font.GothamMedium
-		Title_4.Text = "Search"
-		Title_4.TextColor3 = Color3.fromRGB(220, 220, 220)
-		Title_4.TextSize = 15
-
-		Icon_7.Name = "Icon"
-		Icon_7.Parent = SearchBar
-		Icon_7.AnchorPoint = Vector2.new(0.5, 0.5)
-		Icon_7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Icon_7.BackgroundTransparency = 1
-		Icon_7.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Icon_7.BorderSizePixel = 0
-		Icon_7.Position = UDim2.new(0.5, 0, 0.5, 0)
-		Icon_7.Size = UDim2.new(0, 22, 0, 22)
-		Icon_7.Image = "rbxassetid://10734943674"
-		Icon_7.ImageTransparency = 0.30000001192092896
-
-		Display_3.Name = "Display"
-		Display_3.Parent = ElemContainer_1
-		Display_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Display_3.BackgroundTransparency = 1
-		Display_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Display_3.BorderSizePixel = 0
-		Display_3.Position = UDim2.new(0, 0, 0.363013685, 0)
-		Display_3.Size = UDim2.new(0.949999988, 0, 0, 17)
-		Display_3.FontFace =
-			Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
-		Display_3.RichText = true
-		Display_3.Text = "Section"
-		Display_3.TextColor3 = Color3.fromRGB(220, 220, 220)
-		Display_3.TextSize = 18
-		Display_3.TextXAlignment = Enum.TextXAlignment.Left
-
-		Dropdown_1.Name = "Dropdown"
-		Dropdown_1.Parent = ElemContainer_1
-		Dropdown_1.AutomaticSize = Enum.AutomaticSize.Y
-		Dropdown_1.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-		Dropdown_1.BackgroundTransparency = 0.4000000059604645
-		Dropdown_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Dropdown_1.BorderSizePixel = 0
-		Dropdown_1.Position = UDim2.new(0.023151705, 0, 0.290023208, 0)
-		Dropdown_1.Size = UDim2.new(0.930000007, 0, 0, 0)
-
-		Displays_3.Name = "Displays"
-		Displays_3.Parent = Dropdown_1
-		Displays_3.AnchorPoint = Vector2.new(0, 0.5)
-		Displays_3.AutomaticSize = Enum.AutomaticSize.Y
-		Displays_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Displays_3.BackgroundTransparency = 1
-		Displays_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Displays_3.BorderSizePixel = 0
-		Displays_3.Position = UDim2.new(0.0125523014, -6, 0.5, 0)
-		Displays_3.Size = UDim2.new(0.763000011, 0, 0, 0)
-
-		IconHolder_3.Name = "IconHolder"
-		IconHolder_3.Parent = Displays_3
-		IconHolder_3.AnchorPoint = Vector2.new(0, 0.5)
-		IconHolder_3.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-		IconHolder_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		IconHolder_3.BorderSizePixel = 0
-		IconHolder_3.Position = UDim2.new(0, 0, 0.5, 0)
-		IconHolder_3.Size = UDim2.new(0, 50, 0, 50)
-		IconHolder_3.Visible = false
-
-		Icon_8.Name = "Icon"
-		Icon_8.Parent = IconHolder_3
-		Icon_8.AnchorPoint = Vector2.new(0.5, 0.5)
-		Icon_8.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Icon_8.BackgroundTransparency = 1
-		Icon_8.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Icon_8.BorderSizePixel = 0
-		Icon_8.LayoutOrder = -1
-		Icon_8.Position = UDim2.new(0.5, 0, 0.5, 0)
-		Icon_8.Size = UDim2.new(0, 30, 0, 30)
-		Icon_8.Image = "rbxassetid://10723424646"
-		Icon_8.ImageColor3 = Color3.fromRGB(220, 220, 220)
-
-		UICorner_16.Parent = IconHolder_3
-		UICorner_16.CornerRadius = UDim.new(0, 15)
-
-		Text_3.Name = "Text"
-		Text_3.Parent = Displays_3
-		Text_3.AutomaticSize = Enum.AutomaticSize.X
-		Text_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Text_3.BackgroundTransparency = 1
-		Text_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Text_3.BorderSizePixel = 0
-		Text_3.LayoutOrder = 2
-		Text_3.Position = UDim2.new(0.178094149, -6, 0, 0)
-		Text_3.Size = UDim2.new(0.279671192, 0, 1, 0)
-
-		UIListLayout_18.Parent = Text_3
-		UIListLayout_18.Padding = UDim.new(0, 5)
-		UIListLayout_18.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_18.VerticalAlignment = Enum.VerticalAlignment.Center
-
-		Display_4.Name = "Display"
-		Display_4.Parent = Text_3
-		Display_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Display_4.BackgroundTransparency = 1
-		Display_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Display_4.BorderSizePixel = 0
-		Display_4.Position = UDim2.new(0, 0, 0.363013685, 0)
-		Display_4.Size = UDim2.new(1, 0, 0, 17)
-		Display_4.FontFace =
-			Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
-		Display_4.Text = "Dropdown"
-		Display_4.TextColor3 = Color3.fromRGB(220, 220, 220)
-		Display_4.TextSize = 18
-		Display_4.TextXAlignment = Enum.TextXAlignment.Left
-
-		Description_4.Name = "Description"
-		Description_4.Parent = Text_3
-		Description_4.AutomaticSize = Enum.AutomaticSize.Y
-		Description_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Description_4.BackgroundTransparency = 1
-		Description_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Description_4.BorderSizePixel = 0
-		Description_4.Position = UDim2.new(0, 0, 0.5, 0)
-		Description_4.Size = UDim2.new(1, 0, 0, 0)
-		Description_4.Font = Enum.Font.GothamMedium
-		Description_4.Text = "Lorem Ipsum Dolor Amet"
-		Description_4.TextColor3 = Color3.fromRGB(180, 180, 180)
-		Description_4.TextSize = 16
-		Description_4.TextWrapped = true
-		Description_4.TextXAlignment = Enum.TextXAlignment.Left
-		Description_4.TextYAlignment = Enum.TextYAlignment.Top
-
-		UIListLayout_19.Parent = Displays_3
-		UIListLayout_19.Padding = UDim.new(0, 10)
-		UIListLayout_19.FillDirection = Enum.FillDirection.Horizontal
-		UIListLayout_19.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_19.VerticalAlignment = Enum.VerticalAlignment.Center
-
-		DropdownHolder_1.Name = "DropdownHolder"
-		DropdownHolder_1.Parent = Dropdown_1
-		DropdownHolder_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		DropdownHolder_1.BackgroundTransparency = 1
-		DropdownHolder_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		DropdownHolder_1.BorderSizePixel = 0
-		DropdownHolder_1.LayoutOrder = 1
-		DropdownHolder_1.Position = UDim2.new(0.298598409, 0, 0, 0)
-		DropdownHolder_1.Size = UDim2.new(0, 254, 0, 54)
-
-		UIListLayout_20.Parent = DropdownHolder_1
-		UIListLayout_20.HorizontalAlignment = Enum.HorizontalAlignment.Right
-		UIListLayout_20.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_20.VerticalAlignment = Enum.VerticalAlignment.Center
-
-		Dropdown_2.Name = "Dropdown"
-		Dropdown_2.Parent = DropdownHolder_1
-		Dropdown_2.AutomaticSize = Enum.AutomaticSize.X
-		Dropdown_2.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-		Dropdown_2.BackgroundTransparency = 0.6000000238418579
-		Dropdown_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Dropdown_2.BorderSizePixel = 0
-		Dropdown_2.Position = UDim2.new(0.00302494015, 0, 0.129629627, 0)
-		Dropdown_2.Size = UDim2.new(0, 189, 0, 40)
-
-		Title_5.Name = "Title"
-		Title_5.Parent = Dropdown_2
-		Title_5.AutomaticSize = Enum.AutomaticSize.X
-		Title_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Title_5.BackgroundTransparency = 1.0099999904632568
-		Title_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Title_5.BorderSizePixel = 0
-		Title_5.LayoutOrder = 1
-		Title_5.Size = UDim2.new(0, 0, 1, 0)
-		Title_5.Font = Enum.Font.GothamMedium
-		Title_5.Text = "Ancient Seed Pack"
-		Title_5.TextColor3 = Color3.fromRGB(220, 220, 220)
-		Title_5.TextSize = 15
-		Title_5.TextTruncate = Enum.TextTruncate.AtEnd
-		Title_5.TextXAlignment = Enum.TextXAlignment.Right
-
-		Icon_9.Name = "Icon"
-		Icon_9.Parent = Dropdown_2
-		Icon_9.AnchorPoint = Vector2.new(0.5, 0.5)
-		Icon_9.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Icon_9.BackgroundTransparency = 1
-		Icon_9.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Icon_9.BorderSizePixel = 0
-		Icon_9.LayoutOrder = 2
-		Icon_9.Position = UDim2.new(0.5, 0, 0.5, 0)
-		Icon_9.Size = UDim2.new(0, 20, 0, 20)
-		Icon_9.Image = "rbxassetid://10709797508"
-		Icon_9.ImageTransparency = 0.30000001192092896
-
-		UIListLayout_21.Parent = Dropdown_2
-		UIListLayout_21.Padding = UDim.new(0, 7)
-		UIListLayout_21.FillDirection = Enum.FillDirection.Horizontal
-		UIListLayout_21.HorizontalAlignment = Enum.HorizontalAlignment.Center
-		UIListLayout_21.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_21.VerticalAlignment = Enum.VerticalAlignment.Center
-
-		UIPadding_11.Parent = Dropdown_2
-		UIPadding_11.PaddingLeft = UDim.new(0, 12)
-		UIPadding_11.PaddingRight = UDim.new(0, 12)
-
-		UIStroke_10.Parent = Dropdown_2
-		UIStroke_10.Color = Color3.fromRGB(255, 255, 255)
-		UIStroke_10.Thickness = 1
-
-		UICorner_17.Parent = Dropdown_2
-		UICorner_17.CornerRadius = UDim.new(1, 0)
-
-		UISizeConstraint_1.Parent = Dropdown_2
-		UISizeConstraint_1.MaxSize = Vector2.new(173, math.huge)
-
-		UIStroke_11.Parent = Dropdown_1
-		UIStroke_11.Color = Color3.fromRGB(255, 255, 255)
-		UIStroke_11.Thickness = 1
-
-		UICorner_18.Parent = Dropdown_1
-		UICorner_18.CornerRadius = UDim.new(0, 20)
-
-		UIPadding_12.Parent = Dropdown_1
-		UIPadding_12.PaddingBottom = UDim.new(0, 15)
-		UIPadding_12.PaddingLeft = UDim.new(0, 15)
-		UIPadding_12.PaddingRight = UDim.new(0, 15)
-		UIPadding_12.PaddingTop = UDim.new(0, 15)
-
-		UIListLayout_22.Parent = Dropdown_1
-		UIListLayout_22.FillDirection = Enum.FillDirection.Horizontal
-		UIListLayout_22.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_22.VerticalAlignment = Enum.VerticalAlignment.Center
-
-		Button_4.Name = "Button"
-		Button_4.Parent = ElemContainer_1
-		Button_4.AutomaticSize = Enum.AutomaticSize.Y
-		Button_4.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-		Button_4.BackgroundTransparency = 0.4000000059604645
-		Button_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Button_4.BorderSizePixel = 0
-		Button_4.Position = UDim2.new(0.0259433966, 0, 0, 0)
-		Button_4.Size = UDim2.new(0.930000007, 0, 0, 0)
-
-		Displays_4.Name = "Displays"
-		Displays_4.Parent = Button_4
-		Displays_4.AnchorPoint = Vector2.new(0, 0.5)
-		Displays_4.AutomaticSize = Enum.AutomaticSize.Y
-		Displays_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Displays_4.BackgroundTransparency = 1
-		Displays_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Displays_4.BorderSizePixel = 0
-		Displays_4.Position = UDim2.new(0.0125523014, -6, 0.5, 0)
-		Displays_4.Size = UDim2.new(0.763000011, 0, 0, 0)
-
-		IconHolder_4.Name = "IconHolder"
-		IconHolder_4.Parent = Displays_4
-		IconHolder_4.AnchorPoint = Vector2.new(0, 0.5)
-		IconHolder_4.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-		IconHolder_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		IconHolder_4.BorderSizePixel = 0
-		IconHolder_4.Position = UDim2.new(0, 0, 0.5, 0)
-		IconHolder_4.Size = UDim2.new(0, 50, 0, 50)
-
-		Icon_10.Name = "Icon"
-		Icon_10.Parent = IconHolder_4
-		Icon_10.AnchorPoint = Vector2.new(0.5, 0.5)
-		Icon_10.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Icon_10.BackgroundTransparency = 1
-		Icon_10.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Icon_10.BorderSizePixel = 0
-		Icon_10.LayoutOrder = -1
-		Icon_10.Position = UDim2.new(0.5, 0, 0.5, 0)
-		Icon_10.Size = UDim2.new(0, 30, 0, 30)
-		Icon_10.Image = "rbxassetid://10723424646"
-		Icon_10.ImageColor3 = Color3.fromRGB(220, 220, 220)
-
-		UICorner_19.Parent = IconHolder_4
-		UICorner_19.CornerRadius = UDim.new(0, 15)
-
-		Text_4.Name = "Text"
-		Text_4.Parent = Displays_4
-		Text_4.AutomaticSize = Enum.AutomaticSize.X
-		Text_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Text_4.BackgroundTransparency = 1
-		Text_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Text_4.BorderSizePixel = 0
-		Text_4.LayoutOrder = 2
-		Text_4.Position = UDim2.new(0.178094149, -6, 0, 0)
-		Text_4.Size = UDim2.new(0.279671192, 0, 1, 0)
-
-		UIListLayout_23.Parent = Text_4
-		UIListLayout_23.Padding = UDim.new(0, 5)
-		UIListLayout_23.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_23.VerticalAlignment = Enum.VerticalAlignment.Center
-
-		Display_5.Name = "Display"
-		Display_5.Parent = Text_4
-		Display_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Display_5.BackgroundTransparency = 1
-		Display_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Display_5.BorderSizePixel = 0
-		Display_5.Position = UDim2.new(0, 0, 0.363013685, 0)
-		Display_5.Size = UDim2.new(0, 68, 0, 17)
-		Display_5.FontFace =
-			Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
-		Display_5.Text = "Button"
-		Display_5.TextColor3 = Color3.fromRGB(220, 220, 220)
-		Display_5.TextSize = 18
-		Display_5.TextXAlignment = Enum.TextXAlignment.Left
-
-		Description_5.Name = "Description"
-		Description_5.Parent = Text_4
-		Description_5.AutomaticSize = Enum.AutomaticSize.Y
-		Description_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Description_5.BackgroundTransparency = 1
-		Description_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Description_5.BorderSizePixel = 0
-		Description_5.Position = UDim2.new(0, 0, 0.5, 0)
-		Description_5.Size = UDim2.new(1, 0, 0, 0)
-		Description_5.Font = Enum.Font.GothamMedium
-		Description_5.Text = "Lorem Ipsum Dolor Amet"
-		Description_5.TextColor3 = Color3.fromRGB(180, 180, 180)
-		Description_5.TextSize = 16
-		Description_5.TextWrapped = true
-		Description_5.TextXAlignment = Enum.TextXAlignment.Left
-		Description_5.TextYAlignment = Enum.TextYAlignment.Top
-
-		UIListLayout_24.Parent = Displays_4
-		UIListLayout_24.Padding = UDim.new(0, 10)
-		UIListLayout_24.FillDirection = Enum.FillDirection.Horizontal
-		UIListLayout_24.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_24.VerticalAlignment = Enum.VerticalAlignment.Center
-
-		DropdownHolder_2.Name = "DropdownHolder"
-		DropdownHolder_2.Parent = Button_4
-		DropdownHolder_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		DropdownHolder_2.BackgroundTransparency = 1
-		DropdownHolder_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		DropdownHolder_2.BorderSizePixel = 0
-		DropdownHolder_2.LayoutOrder = 1
-		DropdownHolder_2.Position = UDim2.new(0.931026936, 0, 0, 0)
-		DropdownHolder_2.Size = UDim2.new(0, 24, 0, 54)
-
-		UIListLayout_25.Parent = DropdownHolder_2
-		UIListLayout_25.HorizontalAlignment = Enum.HorizontalAlignment.Right
-		UIListLayout_25.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_25.VerticalAlignment = Enum.VerticalAlignment.Center
-
-		Button_5.Name = "Button"
-		Button_5.Parent = DropdownHolder_2
-		Button_5.Active = true
-		Button_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Button_5.BackgroundTransparency = 1
-		Button_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Button_5.BorderSizePixel = 0
-		Button_5.Size = UDim2.new(0, 29, 0, 29)
-		Button_5.Image = "rbxassetid://10709791437"
-		Button_5.ImageColor3 = Color3.fromRGB(180, 180, 180)
-
-		UIStroke_12.Parent = Button_4
-		UIStroke_12.Color = Color3.fromRGB(255, 255, 255)
-		UIStroke_12.Thickness = 1
-
-		UICorner_20.Parent = Button_4
-		UICorner_20.CornerRadius = UDim.new(0, 20)
-
-		UIPadding_13.Parent = Button_4
-		UIPadding_13.PaddingBottom = UDim.new(0, 15)
-		UIPadding_13.PaddingLeft = UDim.new(0, 15)
-		UIPadding_13.PaddingRight = UDim.new(0, 15)
-		UIPadding_13.PaddingTop = UDim.new(0, 15)
-
-		UIListLayout_26.Parent = Button_4
-		UIListLayout_26.FillDirection = Enum.FillDirection.Horizontal
-		UIListLayout_26.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_26.VerticalAlignment = Enum.VerticalAlignment.Center
-
-		UIListLayout_27.Parent = ElemContainer_1
-		UIListLayout_27.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_27.VerticalAlignment = Enum.VerticalAlignment.Center
-
-		Paragraph_1.Name = "Paragraph"
-		Paragraph_1.Parent = ElemContainer_1
-		Paragraph_1.AutomaticSize = Enum.AutomaticSize.Y
-		Paragraph_1.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-		Paragraph_1.BackgroundTransparency = 0.4000000059604645
-		Paragraph_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Paragraph_1.BorderSizePixel = 0
-		Paragraph_1.Position = UDim2.new(0.0259433966, 0, 0, 0)
-		Paragraph_1.Size = UDim2.new(0.930000007, 0, 0, 0)
-
-		Displays_5.Name = "Displays"
-		Displays_5.Parent = Paragraph_1
-		Displays_5.AnchorPoint = Vector2.new(0, 0.5)
-		Displays_5.AutomaticSize = Enum.AutomaticSize.Y
-		Displays_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Displays_5.BackgroundTransparency = 1
-		Displays_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Displays_5.BorderSizePixel = 0
-		Displays_5.Position = UDim2.new(0.0125523014, -6, 0.5, 0)
-		Displays_5.Size = UDim2.new(0.763000011, 0, 0, 0)
-
-		IconHolder_5.Name = "IconHolder"
-		IconHolder_5.Parent = Displays_5
-		IconHolder_5.AnchorPoint = Vector2.new(0, 0.5)
-		IconHolder_5.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-		IconHolder_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		IconHolder_5.BorderSizePixel = 0
-		IconHolder_5.Position = UDim2.new(0, 0, 0.5, 0)
-		IconHolder_5.Size = UDim2.new(0, 50, 0, 50)
-
-		Icon_11.Name = "Icon"
-		Icon_11.Parent = IconHolder_5
-		Icon_11.AnchorPoint = Vector2.new(0.5, 0.5)
-		Icon_11.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Icon_11.BackgroundTransparency = 1
-		Icon_11.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Icon_11.BorderSizePixel = 0
-		Icon_11.LayoutOrder = -1
-		Icon_11.Position = UDim2.new(0.5, 0, 0.5, 0)
-		Icon_11.Size = UDim2.new(0, 30, 0, 30)
-		Icon_11.Image = "rbxassetid://10723424646"
-		Icon_11.ImageColor3 = Color3.fromRGB(220, 220, 220)
-
-		UICorner_21.Parent = IconHolder_5
-		UICorner_21.CornerRadius = UDim.new(0, 15)
-
-		Text_5.Name = "Text"
-		Text_5.Parent = Displays_5
-		Text_5.AutomaticSize = Enum.AutomaticSize.X
-		Text_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Text_5.BackgroundTransparency = 1
-		Text_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Text_5.BorderSizePixel = 0
-		Text_5.LayoutOrder = 2
-		Text_5.Position = UDim2.new(0.178094149, -6, 0, 0)
-		Text_5.Size = UDim2.new(0.279671192, 0, 1, 0)
-
-		UIListLayout_28.Parent = Text_5
-		UIListLayout_28.Padding = UDim.new(0, 5)
-		UIListLayout_28.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_28.VerticalAlignment = Enum.VerticalAlignment.Center
-
-		Display_6.Name = "Display"
-		Display_6.Parent = Text_5
-		Display_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Display_6.BackgroundTransparency = 1
-		Display_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Display_6.BorderSizePixel = 0
-		Display_6.Position = UDim2.new(0, 0, 0.363013685, 0)
-		Display_6.Size = UDim2.new(1, 0, 0, 17)
-		Display_6.FontFace =
-			Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
-		Display_6.Text = "Paragraph"
-		Display_6.TextColor3 = Color3.fromRGB(220, 220, 220)
-		Display_6.TextSize = 18
-		Display_6.TextXAlignment = Enum.TextXAlignment.Left
-
-		Description_6.Name = "Description"
-		Description_6.Parent = Text_5
-		Description_6.AutomaticSize = Enum.AutomaticSize.Y
-		Description_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Description_6.BackgroundTransparency = 1
-		Description_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Description_6.BorderSizePixel = 0
-		Description_6.Position = UDim2.new(0, 0, 0.5, 0)
-		Description_6.Size = UDim2.new(1, 0, 0, 0)
-		Description_6.Font = Enum.Font.GothamMedium
-		Description_6.Text = "Lorem Ipsum Dolor Amet Lorem Ipsum Dolor AmetLorem Ipsum Dolor AmetLorem Ipsum Dolor Amet"
-		Description_6.TextColor3 = Color3.fromRGB(180, 180, 180)
-		Description_6.TextSize = 16
-		Description_6.TextWrapped = true
-		Description_6.TextXAlignment = Enum.TextXAlignment.Left
-		Description_6.TextYAlignment = Enum.TextYAlignment.Top
-
-		UIListLayout_29.Parent = Displays_5
-		UIListLayout_29.Padding = UDim.new(0, 10)
-		UIListLayout_29.FillDirection = Enum.FillDirection.Horizontal
-		UIListLayout_29.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_29.VerticalAlignment = Enum.VerticalAlignment.Center
-
-		UIStroke_13.Parent = Paragraph_1
-		UIStroke_13.Color = Color3.fromRGB(255, 255, 255)
-		UIStroke_13.Thickness = 1
-
-		UICorner_22.Parent = Paragraph_1
-		UICorner_22.CornerRadius = UDim.new(0, 20)
-
-		UIPadding_14.Parent = Paragraph_1
-		UIPadding_14.PaddingBottom = UDim.new(0, 15)
-		UIPadding_14.PaddingLeft = UDim.new(0, 15)
-		UIPadding_14.PaddingRight = UDim.new(0, 15)
-		UIPadding_14.PaddingTop = UDim.new(0, 15)
-
-		UIListLayout_30.Parent = Paragraph_1
-		UIListLayout_30.Padding = UDim.new(0, 10)
-		UIListLayout_30.FillDirection = Enum.FillDirection.Horizontal
-		UIListLayout_30.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_30.VerticalAlignment = Enum.VerticalAlignment.Center
-
-		Buttons_1.Name = "Buttons"
-		Buttons_1.Parent = Paragraph_1
-		Buttons_1.AutomaticSize = Enum.AutomaticSize.Y
-		Buttons_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Buttons_1.BackgroundTransparency = 1
-		Buttons_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Buttons_1.BorderSizePixel = 0
-		Buttons_1.LayoutOrder = 1
-		Buttons_1.Position = UDim2.new(0, 0, 0.820895493, 0)
-		Buttons_1.Size = UDim2.new(0, 372, 0, 28)
-		Buttons_1.Visible = false
-
-		UIListLayout_31.Parent = Buttons_1
-		UIListLayout_31.FillDirection = Enum.FillDirection.Horizontal
-		UIListLayout_31.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_31.VerticalAlignment = Enum.VerticalAlignment.Bottom
-
-		List_1.Name = "List"
-		List_1.Parent = Buttons_1
-		List_1.Active = true
-		List_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		List_1.BackgroundTransparency = 1
-		List_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		List_1.BorderSizePixel = 0
-		List_1.Size = UDim2.new(1, 0, 0, 42)
-		List_1.ClipsDescendants = true
-		List_1.AutomaticCanvasSize = Enum.AutomaticSize.X
-		List_1.BottomImage = "rbxasset://textures/ui/Scroll/scroll-bottom.png"
-		List_1.CanvasPosition = Vector2.new(0, 0)
-		List_1.CanvasSize = UDim2.new(0, 0, 0, 0)
-		List_1.ElasticBehavior = Enum.ElasticBehavior.WhenScrollable
-		List_1.HorizontalScrollBarInset = Enum.ScrollBarInset.None
-		List_1.MidImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-		List_1.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
-		List_1.ScrollBarImageTransparency = 0
-		List_1.ScrollBarThickness = 12
-		List_1.ScrollingDirection = Enum.ScrollingDirection.XY
-		List_1.TopImage = "rbxasset://textures/ui/Scroll/scroll-top.png"
-		List_1.VerticalScrollBarInset = Enum.ScrollBarInset.None
-		List_1.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Right
-
-		UIListLayout_32.Parent = List_1
-		UIListLayout_32.Padding = UDim.new(0, 9)
-		UIListLayout_32.FillDirection = Enum.FillDirection.Horizontal
-		UIListLayout_32.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_32.VerticalAlignment = Enum.VerticalAlignment.Center
-
-		UIPadding_15.Parent = List_1
-		UIPadding_15.PaddingLeft = UDim.new(0, 1)
-
-		UIListLayout_33.Parent = Container_1
-		UIListLayout_33.FillDirection = Enum.FillDirection.Horizontal
-		UIListLayout_33.SortOrder = Enum.SortOrder.LayoutOrder
-
-		UIListLayout_34.Parent = Window
-		UIListLayout_34.Padding = UDim.new(0, 5)
-		UIListLayout_34.SortOrder = Enum.SortOrder.LayoutOrder
-
-		function Elements:NewToggle(Data) end
-
-		function Elements:NewSlider(Data) end
-
-		function Methods:NewDropdown(Data) end
-
-		function Methods:NewParagraph(Data) end
-
-		function Methods:NewButton(Data) end
-
-		for _, Element in pairs(ElemContainer_1:GetChildren()) do
-			if Element:FindFirstChild("UIStroke") then
-				Element.UIStroke.Transparency = 0.9
-			end
-		end
-
-		SignalHandler:NewSignal(ElemContainer_1, "ChildAdded", function(Element)
-			if Element:FindFirstChild("UIStroke") then
-				Element.UIStroke.Transparency = 0.9
-			end
-		end)
-
-		if not DataEnd.SearchBarEnabled then
-			SearchBar.Visible = false
-		end
-
-		return Elements
-	end
+	local Window = Instance.new("ImageButton")
+	local UICorner_1 = Instance.new("UICorner")
+	local UIStroke_1 = Instance.new("UIStroke")
+	local TopBar_1 = Instance.new("Frame")
+	local Header_1 = Instance.new("Frame")
+	local Title_1 = Instance.new("ImageButton")
+	local UICorner_2 = Instance.new("UICorner")
+	local UIListLayout_1 = Instance.new("UIListLayout")
+	local UIPadding_1 = Instance.new("UIPadding")
+	local UIStroke_2 = Instance.new("UIStroke")
+	local Title_2 = Instance.new("TextLabel")
+	local Icon_1 = Instance.new("ImageLabel")
+	local UIListLayout_2 = Instance.new("UIListLayout")
+	local UIPadding_2 = Instance.new("UIPadding")
+	local UIListLayout_3 = Instance.new("UIListLayout")
+	local ButtonZones_1 = Instance.new("Frame")
+	local Button_1 = Instance.new("ImageButton")
+	local UICorner_3 = Instance.new("UICorner")
+	local UIListLayout_4 = Instance.new("UIListLayout")
+	local UIPadding_3 = Instance.new("UIPadding")
+	local UIStroke_3 = Instance.new("UIStroke")
+	local Icon_2 = Instance.new("ImageLabel")
+	local Button_2 = Instance.new("ImageButton")
+	local UICorner_4 = Instance.new("UICorner")
+	local UIListLayout_5 = Instance.new("UIListLayout")
+	local UIPadding_4 = Instance.new("UIPadding")
+	local UIStroke_4 = Instance.new("UIStroke")
+	local Icon_3 = Instance.new("ImageLabel")
+	local Button_3 = Instance.new("ImageButton")
+	local UICorner_5 = Instance.new("UICorner")
+	local UIListLayout_6 = Instance.new("UIListLayout")
+	local UIPadding_5 = Instance.new("UIPadding")
+	local UIStroke_5 = Instance.new("UIStroke")
+	local Icon_4 = Instance.new("ImageLabel")
+	local UIPadding_6 = Instance.new("UIPadding")
+	local UIListLayout_7 = Instance.new("UIListLayout")
+	local Container_1 = Instance.new("ScrollingFrame")
+	local UIListLayout_33 = Instance.new("UIListLayout")
+	local UIListLayout_34 = Instance.new("UIListLayout")
+
+	self.Body = Window
 
 	Window.Name = "Window"
 	Window.Parent = self.Library.GUI
@@ -895,8 +173,10 @@ function Window:Init(DataEnd)
 	Icon_1.BorderSizePixel = 0
 	Icon_1.Position = UDim2.new(0.5, 0, 0.5, 0)
 	Icon_1.Size = UDim2.new(0, 22, 0, 22)
-	Icon_1.Image = "rbxassetid://10734975692" --// TODO: add logo
+	Icon_1.Image = Library:GetLucideIcon(DataEnd.Logo or DataEnd.Icon or "") or ""
 	Icon_1.ImageTransparency = 0.30000001192092896
+
+	SignalHandler:HandleNil(Icon_1)
 
 	UIListLayout_2.Parent = Header_1
 	UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
@@ -1096,17 +376,247 @@ function Window:Init(DataEnd)
 	Container_1.VerticalScrollBarInset = Enum.ScrollBarInset.None
 	Container_1.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Right
 
+	UIListLayout_33.Parent = Container_1
+	UIListLayout_33.FillDirection = Enum.FillDirection.Horizontal
+	UIListLayout_33.SortOrder = Enum.SortOrder.LayoutOrder
+
+	UIListLayout_34.Parent = Window
+	UIListLayout_34.Padding = UDim.new(0, 5)
+	UIListLayout_34.SortOrder = Enum.SortOrder.LayoutOrder
+
 	for _, Stroke in pairs(ButtonZones_1:GetDescendants()) do
 		if Stroke:IsA("UIStroke") then
 			Stroke.Transparency = 0.84 --// My gui2lua didnt save stroke transparency so i had to do it manually :weary:
 		end
 	end
 
-	function Methods:Enter() end
+	function Methods:NewContext(Iden)
+		local Elements = {}
 
-	function Methods:Exit() end
+		local ElemContainer_1 = Instance.new("ScrollingFrame")
+		local UIListLayout_8 = Instance.new("UIListLayout")
+		local SearchBar = Instance.new("ImageButton")
+		local UICorner_15 = Instance.new("UICorner")
+		local UIListLayout_17 = Instance.new("UIListLayout")
+		local UIPadding_10 = Instance.new("UIPadding")
+		local UIStroke_9 = Instance.new("UIStroke")
+		local Title_4 = Instance.new("TextLabel")
+		local Icon_7 = Instance.new("ImageLabel")
+		local Display_3 = Instance.new("TextLabel")
 
-	self.Body = Window
+		ElemContainer_1.Name = Iden.Title
+		ElemContainer_1.Parent = Container_1
+		ElemContainer_1.Active = true
+		ElemContainer_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		ElemContainer_1.BackgroundTransparency = 1
+		ElemContainer_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		ElemContainer_1.BorderSizePixel = 0
+		ElemContainer_1.Size = UDim2.new(1, 0, 1, 0)
+		ElemContainer_1.ClipsDescendants = true
+		ElemContainer_1.AutomaticCanvasSize = Enum.AutomaticSize.Y
+		ElemContainer_1.BottomImage = "rbxasset://textures/ui/Scroll/scroll-bottom.png"
+		ElemContainer_1.CanvasPosition = Vector2.new(0, 0)
+		ElemContainer_1.CanvasSize = UDim2.new(0, 0, 0, 0)
+		ElemContainer_1.ElasticBehavior = Enum.ElasticBehavior.WhenScrollable
+		ElemContainer_1.HorizontalScrollBarInset = Enum.ScrollBarInset.None
+		ElemContainer_1.MidImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
+		ElemContainer_1.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+		ElemContainer_1.ScrollBarImageTransparency = 0
+		ElemContainer_1.ScrollBarThickness = 0
+		ElemContainer_1.ScrollingDirection = Enum.ScrollingDirection.XY
+		ElemContainer_1.TopImage = "rbxasset://textures/ui/Scroll/scroll-top.png"
+		ElemContainer_1.VerticalScrollBarInset = Enum.ScrollBarInset.None
+		ElemContainer_1.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Right
+
+		UIListLayout_8.Parent = ElemContainer_1
+		UIListLayout_8.Padding = UDim.new(0, 8)
+		UIListLayout_8.HorizontalAlignment = Enum.HorizontalAlignment.Center
+		UIListLayout_8.SortOrder = Enum.SortOrder.LayoutOrder
+
+		SearchBar.Name = "Title"
+		SearchBar.Parent = ElemContainer_1
+		SearchBar.Active = true
+		SearchBar.AnchorPoint = Vector2.new(0.5, 0.5)
+		SearchBar.AutoButtonColor = false
+		SearchBar.AutomaticSize = Enum.AutomaticSize.X
+		SearchBar.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+		SearchBar.BackgroundTransparency = 0.10000000149011612
+		SearchBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		SearchBar.BorderSizePixel = 0
+		SearchBar.LayoutOrder = -1
+		SearchBar.Modal = true
+		SearchBar.Position = UDim2.new(0.48815167, 0, 0.0359628759, 0)
+		SearchBar.Size = UDim2.new(0.939999998, 0, 0, 45)
+		SearchBar.Image = "rbxassetid://16255699706"
+		SearchBar.ImageTransparency = 0.949999988079071
+		SearchBar.ScaleType = Enum.ScaleType.Crop
+
+		UICorner_15.Parent = SearchBar
+		UICorner_15.CornerRadius = UDim.new(1, 0)
+
+		UIListLayout_17.Parent = SearchBar
+		UIListLayout_17.Padding = UDim.new(0, 7)
+		UIListLayout_17.FillDirection = Enum.FillDirection.Horizontal
+		UIListLayout_17.SortOrder = Enum.SortOrder.LayoutOrder
+		UIListLayout_17.VerticalAlignment = Enum.VerticalAlignment.Center
+
+		UIPadding_10.Parent = SearchBar
+		UIPadding_10.PaddingLeft = UDim.new(0, 12)
+		UIPadding_10.PaddingRight = UDim.new(0, 12)
+
+		UIStroke_9.Parent = SearchBar
+		UIStroke_9.Color = Color3.fromRGB(255, 255, 255)
+		UIStroke_9.Thickness = 1
+
+		Title_4.Name = "Title"
+		Title_4.Parent = SearchBar
+		Title_4.AutomaticSize = Enum.AutomaticSize.X
+		Title_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Title_4.BackgroundTransparency = 1.0099999904632568
+		Title_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Title_4.BorderSizePixel = 0
+		Title_4.LayoutOrder = 1
+		Title_4.Size = UDim2.new(0, 0, 1, 0)
+		Title_4.Font = Enum.Font.GothamMedium
+		Title_4.Text = "Search"
+		Title_4.TextColor3 = Color3.fromRGB(220, 220, 220)
+		Title_4.TextSize = 15
+
+		Icon_7.Name = "Icon"
+		Icon_7.Parent = SearchBar
+		Icon_7.AnchorPoint = Vector2.new(0.5, 0.5)
+		Icon_7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Icon_7.BackgroundTransparency = 1
+		Icon_7.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Icon_7.BorderSizePixel = 0
+		Icon_7.Position = UDim2.new(0.5, 0, 0.5, 0)
+		Icon_7.Size = UDim2.new(0, 22, 0, 22)
+		Icon_7.Image = "rbxassetid://10734943674"
+		Icon_7.ImageTransparency = 0.30000001192092896
+
+		Display_3.Name = "Display"
+		Display_3.Parent = ElemContainer_1
+		Display_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Display_3.BackgroundTransparency = 1
+		Display_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Display_3.BorderSizePixel = 0
+		Display_3.Position = UDim2.new(0, 0, 0.363013685, 0)
+		Display_3.Size = UDim2.new(0.949999988, 0, 0, 17)
+		Display_3.FontFace =
+			Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
+		Display_3.RichText = true
+		Display_3.Text = "Section"
+		Display_3.TextColor3 = Color3.fromRGB(220, 220, 220)
+		Display_3.TextSize = 18
+		Display_3.TextXAlignment = Enum.TextXAlignment.Left
+
+		function Elements:NewToggle(Data)
+			local Toggle = ToggleModule.New(Library, ElemContainer_1)
+			Toggle:Init(Data)
+		end
+
+		function Elements:NewSlider(Data)
+			local Slider = SliderModule.New(Library, ElemContainer_1)
+			Slider:Init(Data)
+		end
+
+		function Elements:NewDropdown(Data) end
+
+		function Elements:NewParagraph(Data) end
+
+		function Elements:NewButton(Data)
+			local Button = ButtonModule.New(Library, ElemContainer_1)
+			Button:Init(Data)
+		end
+
+		if not DataEnd.SearchBarEnabled then
+			SearchBar.Visible = false
+		end
+
+		for _, Element in pairs(ElemContainer_1:GetChildren()) do
+			if Element:FindFirstChild("UICorner") then
+				SignalHandler:NewSignal(Element, "MouseEnter", function()
+					AnimHandler:Animate(
+						Element:FindFirstChild("UICorner"),
+						TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+						{ CornerRadius = UDim.new(0, 15) }
+					)
+				end)
+
+				SignalHandler:NewSignal(Element, "MouseLeave", function()
+					AnimHandler:Animate(
+						Element:FindFirstChild("UICorner"),
+						TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+						{ CornerRadius = UDim.new(0, 20) }
+					)
+				end)
+			end
+		end
+
+		SignalHandler:NewSignal(ElemContainer_1, "ChildAdded", function(Element)
+			SignalHandler:NewSignal(Element, "MouseEnter", function()
+				AnimHandler:Animate(
+					Element:FindFirstChild("UICorner"),
+					TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+					{ CornerRadius = UDim.new(0, 13) }
+				)
+			end)
+
+			SignalHandler:NewSignal(Element, "MouseLeave", function()
+				AnimHandler:Animate(
+					Element:FindFirstChild("UICorner"),
+					TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+					{ CornerRadius = UDim.new(0, 20) }
+				)
+			end)
+		end)
+
+		return Elements
+	end
+
+	function Methods:Enter()
+		Window.Visible = true
+		AnimHandler:Animate(
+			Window,
+			TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{ Size = self.Size }
+		)
+	end
+
+	function Methods:Exit()
+		AnimHandler:Animate(
+			Window,
+			TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{ Size = UDim2.fromOffset(Window.AbsoluteSize.X, 0) }
+		)
+
+		task.wait(0.37)
+		Window.Visible = false
+	end
+
+	function Methods:Change(Hash)
+		if type(Hash) == "string" then
+			if Container_1:FindFirstChild(Hash) then
+				local ElemContainer = Container_1[Hash]
+				local Index = SignalHandler:GetElementPositionFromTable(Container_1:GetChildren(), ElemContainer)
+
+				AnimHandler:Animate(
+					Container_1,
+					TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+					{ CanvasPosition = Vector2.new(Container_1.AbsoluteSize.X * tonumber(Index), 0) }
+				)
+			end
+		elseif typeof(Hash) == "Instance" and Hash.Parent == Container_1 then
+			local Index = SignalHandler:GetElementPositionFromTable(Container_1:GetChildren(), Hash)
+
+			AnimHandler:Animate(
+				Container_1,
+				TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{ CanvasPosition = Vector2.new(Container_1.AbsoluteSize.X * tonumber(Index), 0) }
+			)
+		end
+	end
+
 	return Methods
 end
 

@@ -2,19 +2,30 @@ local Handler = {
 	Instances = {},
 }
 
-function Handler:NewInstance(ClassName, Proprieties)
-	local NewInstance = Instance.new[ClassName]
-	for Propriety, Value in pairs(Proprieties) do
-		NewInstance[Propriety] = Value
+function Handler:New(ClassName, Properties, Container)
+	local Success, NewInstance = pcall(Instance.new, ClassName)
+	if not Success then
+		warn("Invalid ClassName: " .. tostring(ClassName))
+		return nil
 	end
 
-	table.insert(Handler.Instances, NewInstance)
+	if Properties then
+		for Property, Value in pairs(Properties) do
+			NewInstance[Property] = Value
+		end
+	end
+
+	table.insert(Container or self.Instances, NewInstance)
+	return NewInstance
 end
 
 function Handler:ClearInstances()
-	for _, v in pairs(Handler.Instances) do
-		v:Destroy()
+	for _, Instance in pairs(self.Instances) do
+		if Instance and Instance.Destroy then
+			Instance:Destroy()
+		end
 	end
+	table.clear(self.Instances)
 end
 
 return Handler

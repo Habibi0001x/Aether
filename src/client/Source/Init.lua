@@ -1,3 +1,4 @@
+local UserInputService = game:GetService("UserInputService")
 local Library = {}
 Library.__index = Library
 
@@ -8,23 +9,28 @@ local SignalHandler = require(script.Parent.Parent:WaitForChild("Handlers"):Wait
 local AnimationHandler = require(script.Parent.Parent:WaitForChild("Handlers"):WaitForChild("AnimationHandler"))
 local InstanceHandler = require(script.Parent.Parent:WaitForChild("Handlers"):WaitForChild("InstanceHandler"))
 
+--// Temp
+local Lucide = require(script.Parent.Parent:WaitForChild("Config"):WaitForChild("Icons"))
+
 if shared.Library then
 	shared.Library:Uninject()
 	shared.Library = Library
 end
+
+--//TODO: add import
 
 --// Core
 Library.CloneRef = cloneref or function(Object)
 	assert(Object, "No object found for 'CloneRef'")
 	return Object
 end
-
 Library.ProtectGui = protectgui or (syn and syn.protect_gui) or function() end
 
 Library.Services = {
 	TweenService = Library.CloneRef(game:GetService("TweenService")) :: TweenService,
 	RunService = Library.CloneRef(game:GetService("RunService")) :: RunService,
 	Players = Library.CloneRef(game:GetService("Players")) :: Players,
+	UserInputService = Library.CloneRef(game:GetService("UserInputService")) :: UserInputService,
 }
 
 Library.Font = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal) --//TODO: add :ChangeFont
@@ -44,10 +50,8 @@ else
 end
 
 assert(Parent, "Failed to get gui parent")
-
-Library.GUI = InstanceHandler:NewInstance("ScreenGui")
-Library.GUI.Parent = Parent
-Library.GUI.ResetOnSpawn = false
+Library.GUI =
+	InstanceHandler:New("ScreenGui", { Parent = Parent, ResetOnSpawn = false, IgnoreGuiInset = true, Name = "Aether" })
 
 --// Methods
 function Library:Setup(Data)
@@ -77,14 +81,38 @@ function Library:Setup(Data)
 	return NavigationUI
 end
 
-function Library:GetLucideIcon()
-	--//TODO: add lucide icons api
-	return nil
+function Library:GetLucideIcon(Icon)
+	assert(Icon, "No icon passed for 'GetLucideIcon'")
+	if type(Icon) ~= "string" then
+		return
+	end
+
+	if Icon:find("rbxassetid") then
+		return Icon
+	else
+		if Services.RunService:IsStudio() then
+			for Name, AssetId in pairs(Lucide) do
+				if Name:lower():find(Icon:lower()) then
+					return AssetId
+				end
+			end
+		else
+			local Url =
+				game:HttpGet("https://raw.githubusercontent.com/Habibi0001x/lucide-icons-/refs/heads/main/icons") --// Credits: Fluent
+			local Data = loadstring(Url)() --//TODO: move these outside the thread
+
+			for Name, AssetId in pairs(Data) do
+				if Name:lower():find(Icon:lower()) then
+					return AssetId
+				end
+			end
+		end
+	end
+
+	return "rbxassetid://0"
 end
 
 function Library:Uninject()
-	--//TODO: Fix Uninject
-
 	SignalHandler:DisconnectAllSignals()
 	InstanceHandler:ClearInstances()
 	Library = nil
