@@ -22,121 +22,122 @@ function Window:Init(DataEnd)
 
 	assert(SignalHandler, "No signal handler found for 'Init'")
 	assert(AnimHandler, "No animation handler found for 'Init'")
+	assert(New, "'New' Method is nil")
 
-	local Window = Instance.new("ImageButton")
-	local UICorner_1 = Instance.new("UICorner")
-	local UIStroke_1 = Instance.new("UIStroke")
-	local TopBar_1 = Instance.new("Frame")
-	local Header_1 = Instance.new("Frame")
-	local Title_1 = Instance.new("ImageButton")
-	local UICorner_2 = Instance.new("UICorner")
-	local UIListLayout_1 = Instance.new("UIListLayout")
-	local UIPadding_1 = Instance.new("UIPadding")
-	local UIStroke_2 = Instance.new("UIStroke")
-	local Title_2 = Instance.new("TextLabel")
-	local Icon_1 = Instance.new("ImageLabel")
-	local UIListLayout_2 = Instance.new("UIListLayout")
-	local UIPadding_2 = Instance.new("UIPadding")
-	local UIListLayout_3 = Instance.new("UIListLayout")
-	local ButtonZones_1 = Instance.new("Frame")
-	local Button_1 = Instance.new("ImageButton")
-	local UICorner_3 = Instance.new("UICorner")
-	local UIListLayout_4 = Instance.new("UIListLayout")
-	local UIPadding_3 = Instance.new("UIPadding")
-	local UIStroke_3 = Instance.new("UIStroke")
-	local Icon_2 = Instance.new("ImageLabel")
-	local Button_2 = Instance.new("ImageButton")
-	local UICorner_4 = Instance.new("UICorner")
-	local UIListLayout_5 = Instance.new("UIListLayout")
-	local UIPadding_4 = Instance.new("UIPadding")
-	local UIStroke_4 = Instance.new("UIStroke")
-	local Icon_3 = Instance.new("ImageLabel")
-	local Button_3 = Instance.new("ImageButton")
-	local UICorner_5 = Instance.new("UICorner")
-	local UIListLayout_6 = Instance.new("UIListLayout")
-	local UIPadding_5 = Instance.new("UIPadding")
-	local UIStroke_5 = Instance.new("UIStroke")
-	local Icon_4 = Instance.new("ImageLabel")
-	local UIPadding_6 = Instance.new("UIPadding")
-	local UIListLayout_7 = Instance.new("UIListLayout")
-	local Container_1 = Instance.new("ScrollingFrame")
+	local Window = New("ImageButton")
+	local UICorner_1 = New("UICorner")
+	local UIStroke_1 = New("UIStroke")
+	local TopBar_1 = New("Frame")
+	local Header_1 = New("Frame")
+	local Title_1 = New("ImageButton")
+	local UICorner_2 = New("UICorner")
+	local UIListLayout_1 = New("UIListLayout")
+	local UIPadding_1 = New("UIPadding")
+	local UIStroke_2 = New("UIStroke")
+	local Title_2 = New("TextLabel")
+	local Icon_1 = New("ImageLabel")
+	local UIListLayout_2 = New("UIListLayout")
+	local UIPadding_2 = New("UIPadding")
+	local UIListLayout_3 = New("UIListLayout")
+	local ButtonZones_1 = New("Frame")
+	local Button_1 = New("ImageButton")
+	local UICorner_3 = New("UICorner")
+	local UIListLayout_4 = New("UIListLayout")
+	local UIPadding_3 = New("UIPadding")
+	local UIStroke_3 = New("UIStroke")
+	local Icon_2 = New("ImageLabel")
+	local Button_2 = New("ImageButton")
+	local UICorner_4 = New("UICorner")
+	local UIListLayout_5 = New("UIListLayout")
+	local UIPadding_4 = New("UIPadding")
+	local UIStroke_4 = New("UIStroke")
+	local Icon_3 = New("ImageLabel")
+	local Button_3 = New("ImageButton")
+	local UICorner_5 = New("UICorner")
+	local UIListLayout_6 = New("UIListLayout")
+	local UIPadding_5 = New("UIPadding")
+	local UIStroke_5 = New("UIStroke")
+	local Icon_4 = New("ImageLabel")
+	local UIPadding_6 = New("UIPadding")
+	local UIListLayout_7 = New("UIListLayout")
+	local Container_1 = New("ScrollingFrame")
 
 	function Methods:NewContext(Iden)
 		local Elements = {}
 
-		local ElemContainer_1 = Instance.new("ScrollingFrame")
-		local UIListLayout_8 = Instance.new("UIListLayout")
-		local SearchBar = Instance.new("ImageButton")
-		local UICorner_15 = Instance.new("UICorner")
-		local UIListLayout_17 = Instance.new("UIListLayout")
-		local UIPadding_10 = Instance.new("UIPadding")
-		local UIStroke_9 = Instance.new("UIStroke")
-		local Title_4 = Instance.new("TextLabel")
-		local Icon_7 = Instance.new("ImageLabel")
-		local Display_3 = Instance.new("TextLabel")
-		local Dropdown_1 = Instance.new("Frame")
-		local Displays_3 = Instance.new("Frame")
-		local IconHolder_3 = Instance.new("Frame")
-		local Icon_8 = Instance.new("ImageLabel")
-		local UICorner_16 = Instance.new("UICorner")
-		local Text_3 = Instance.new("Frame")
-		local UIListLayout_18 = Instance.new("UIListLayout")
-		local Display_4 = Instance.new("TextLabel")
-		local Description_4 = Instance.new("TextLabel")
-		local UIListLayout_19 = Instance.new("UIListLayout")
-		local DropdownHolder_1 = Instance.new("Frame")
-		local UIListLayout_20 = Instance.new("UIListLayout")
-		local Dropdown_2 = Instance.new("Frame")
-		local Title_5 = Instance.new("TextLabel")
-		local Icon_9 = Instance.new("ImageLabel")
-		local UIListLayout_21 = Instance.new("UIListLayout")
-		local UIPadding_11 = Instance.new("UIPadding")
-		local UIStroke_10 = Instance.new("UIStroke")
-		local UICorner_17 = Instance.new("UICorner")
-		local UISizeConstraint_1 = Instance.new("UISizeConstraint")
-		local UIStroke_11 = Instance.new("UIStroke")
-		local UICorner_18 = Instance.new("UICorner")
-		local UIPadding_12 = Instance.new("UIPadding")
-		local UIListLayout_22 = Instance.new("UIListLayout")
-		local Button_4 = Instance.new("Frame")
-		local Displays_4 = Instance.new("Frame")
-		local IconHolder_4 = Instance.new("Frame")
-		local Icon_10 = Instance.new("ImageLabel")
-		local UICorner_19 = Instance.new("UICorner")
-		local Text_4 = Instance.new("Frame")
-		local UIListLayout_23 = Instance.new("UIListLayout")
-		local Display_5 = Instance.new("TextLabel")
-		local Description_5 = Instance.new("TextLabel")
-		local UIListLayout_24 = Instance.new("UIListLayout")
-		local DropdownHolder_2 = Instance.new("Frame")
-		local UIListLayout_25 = Instance.new("UIListLayout")
-		local Button_5 = Instance.new("ImageButton")
-		local UIStroke_12 = Instance.new("UIStroke")
-		local UICorner_20 = Instance.new("UICorner")
-		local UIPadding_13 = Instance.new("UIPadding")
-		local UIListLayout_26 = Instance.new("UIListLayout")
-		local UIListLayout_27 = Instance.new("UIListLayout")
-		local Paragraph_1 = Instance.new("Frame")
-		local Displays_5 = Instance.new("Frame")
-		local IconHolder_5 = Instance.new("Frame")
-		local Icon_11 = Instance.new("ImageLabel")
-		local UICorner_21 = Instance.new("UICorner")
-		local Text_5 = Instance.new("Frame")
-		local UIListLayout_28 = Instance.new("UIListLayout")
-		local Display_6 = Instance.new("TextLabel")
-		local Description_6 = Instance.new("TextLabel")
-		local UIListLayout_29 = Instance.new("UIListLayout")
-		local UIStroke_13 = Instance.new("UIStroke")
-		local UICorner_22 = Instance.new("UICorner")
-		local UIPadding_14 = Instance.new("UIPadding")
-		local UIListLayout_30 = Instance.new("UIListLayout")
-		local Buttons_1 = Instance.new("Frame")
-		local UIListLayout_31 = Instance.new("UIListLayout")
-		local List_1 = Instance.new("ScrollingFrame")
-		local UIListLayout_32 = Instance.new("UIListLayout")
-		local UIPadding_15 = Instance.new("UIPadding")
-		local UIListLayout_33 = Instance.new("UIListLayout")
-		local UIListLayout_34 = Instance.new("UIListLayout")
+		local ElemContainer_1 = New("ScrollingFrame")
+		local UIListLayout_8 = New("UIListLayout")
+		local SearchBar = New("ImageButton")
+		local UICorner_15 = New("UICorner")
+		local UIListLayout_17 = New("UIListLayout")
+		local UIPadding_10 = New("UIPadding")
+		local UIStroke_9 = New("UIStroke")
+		local Title_4 = New("TextLabel")
+		local Icon_7 = New("ImageLabel")
+		local Display_3 = New("TextLabel")
+		local Dropdown_1 = New("Frame")
+		local Displays_3 = New("Frame")
+		local IconHolder_3 = New("Frame")
+		local Icon_8 = New("ImageLabel")
+		local UICorner_16 = New("UICorner")
+		local Text_3 = New("Frame")
+		local UIListLayout_18 = New("UIListLayout")
+		local Display_4 = New("TextLabel")
+		local Description_4 = New("TextLabel")
+		local UIListLayout_19 = New("UIListLayout")
+		local DropdownHolder_1 = New("Frame")
+		local UIListLayout_20 = New("UIListLayout")
+		local Dropdown_2 = New("Frame")
+		local Title_5 = New("TextLabel")
+		local Icon_9 = New("ImageLabel")
+		local UIListLayout_21 = New("UIListLayout")
+		local UIPadding_11 = New("UIPadding")
+		local UIStroke_10 = New("UIStroke")
+		local UICorner_17 = New("UICorner")
+		local UISizeConstraint_1 = New("UISizeConstraint")
+		local UIStroke_11 = New("UIStroke")
+		local UICorner_18 = New("UICorner")
+		local UIPadding_12 = New("UIPadding")
+		local UIListLayout_22 = New("UIListLayout")
+		local Button_4 = New("Frame")
+		local Displays_4 = New("Frame")
+		local IconHolder_4 = New("Frame")
+		local Icon_10 = New("ImageLabel")
+		local UICorner_19 = New("UICorner")
+		local Text_4 = New("Frame")
+		local UIListLayout_23 = New("UIListLayout")
+		local Display_5 = New("TextLabel")
+		local Description_5 = New("TextLabel")
+		local UIListLayout_24 = New("UIListLayout")
+		local DropdownHolder_2 = New("Frame")
+		local UIListLayout_25 = New("UIListLayout")
+		local Button_5 = New("ImageButton")
+		local UIStroke_12 = New("UIStroke")
+		local UICorner_20 = New("UICorner")
+		local UIPadding_13 = New("UIPadding")
+		local UIListLayout_26 = New("UIListLayout")
+		local UIListLayout_27 = New("UIListLayout")
+		local Paragraph_1 = New("Frame")
+		local Displays_5 = New("Frame")
+		local IconHolder_5 = New("Frame")
+		local Icon_11 = New("ImageLabel")
+		local UICorner_21 = New("UICorner")
+		local Text_5 = New("Frame")
+		local UIListLayout_28 = New("UIListLayout")
+		local Display_6 = New("TextLabel")
+		local Description_6 = New("TextLabel")
+		local UIListLayout_29 = New("UIListLayout")
+		local UIStroke_13 = New("UIStroke")
+		local UICorner_22 = New("UICorner")
+		local UIPadding_14 = New("UIPadding")
+		local UIListLayout_30 = New("UIListLayout")
+		local Buttons_1 = New("Frame")
+		local UIListLayout_31 = New("UIListLayout")
+		local List_1 = New("ScrollingFrame")
+		local UIListLayout_32 = New("UIListLayout")
+		local UIPadding_15 = New("UIPadding")
+		local UIListLayout_33 = New("UIListLayout")
+		local UIListLayout_34 = New("UIListLayout")
 
 		ElemContainer_1.Name = Iden.Title
 		ElemContainer_1.Parent = Container_1
@@ -763,449 +764,9 @@ function Window:Init(DataEnd)
 		UIListLayout_34.Padding = UDim.new(0, 5)
 		UIListLayout_34.SortOrder = Enum.SortOrder.LayoutOrder
 
-		function Elements:NewToggle(Data)
-			local Methods = {}
+		function Elements:NewToggle(Data) end
 
-			local Toggle_1 = Instance.new("Frame")
-			local Displays_1 = Instance.new("Frame")
-			local IconHolder_1 = Instance.new("Frame")
-			local Icon_5 = Instance.new("ImageLabel")
-			local UICorner_6 = Instance.new("UICorner")
-			local Text_1 = Instance.new("Frame")
-			local UIListLayout_9 = Instance.new("UIListLayout")
-			local Display_1 = Instance.new("TextLabel")
-			local Description_1 = Instance.new("TextLabel")
-			local UIListLayout_10 = Instance.new("UIListLayout")
-			local ToggleHolder_1 = Instance.new("Frame")
-			local Toggle_2 = Instance.new("Frame")
-			local UICorner_7 = Instance.new("UICorner")
-			local UIStroke_6 = Instance.new("UIStroke")
-			local Dot_1 = Instance.new("Frame")
-			local UICorner_8 = Instance.new("UICorner")
-			local UIGradient_1 = Instance.new("UIGradient")
-			local UIListLayout_11 = Instance.new("UIListLayout")
-			local UIStroke_7 = Instance.new("UIStroke")
-			local UICorner_9 = Instance.new("UICorner")
-			local UIPadding_7 = Instance.new("UIPadding")
-			local UIListLayout_12 = Instance.new("UIListLayout")
-			local UIPadding_8 = Instance.new("UIPadding")
-
-			Toggle_2.Name = "Toggle"
-			Toggle_2.Parent = ToggleHolder_1
-			Toggle_2.AnchorPoint = Vector2.new(0, 0.5)
-			Toggle_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Toggle_2.BackgroundTransparency = 0.8999999761581421
-			Toggle_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Toggle_2.BorderSizePixel = 0
-			Toggle_2.Position = UDim2.new(0.522000015, 0, 0.5, 0)
-			Toggle_2.Size = UDim2.new(0, 55, 0, 30)
-
-			UICorner_7.Parent = Toggle_2
-			UICorner_7.CornerRadius = UDim.new(1, 0)
-
-			UIStroke_6.Parent = Toggle_2
-			UIStroke_6.Color = Color3.fromRGB(80, 80, 80)
-			UIStroke_6.Thickness = 1
-
-			Dot_1.Name = "Dot"
-			Dot_1.Parent = Toggle_2
-			Dot_1.AnchorPoint = Vector2.new(1, 0.5)
-			Dot_1.BackgroundColor3 = Color3.fromRGB(220, 220, 220)
-			Dot_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Dot_1.BorderSizePixel = 0
-			Dot_1.Position = UDim2.new(1, -5, 0.5, 0)
-			Dot_1.Size = UDim2.new(0, 20, 0, 20)
-
-			UICorner_8.Parent = Dot_1
-			UICorner_8.CornerRadius = UDim.new(1, 0)
-
-			UIGradient_1.Parent = Dot_1
-			UIGradient_1.Rotation = 90
-			UIGradient_1.Transparency =
-				NumberSequence.new({ NumberSequenceKeypoint.new(0, 0), NumberSequenceKeypoint.new(1, 0.26875) })
-
-			UIListLayout_11.Parent = ToggleHolder_1
-			UIListLayout_11.HorizontalAlignment = Enum.HorizontalAlignment.Right
-			UIListLayout_11.SortOrder = Enum.SortOrder.LayoutOrder
-			UIListLayout_11.VerticalAlignment = Enum.VerticalAlignment.Center
-
-			UIStroke_7.Parent = Toggle_1
-			UIStroke_7.Color = Color3.fromRGB(255, 255, 255)
-			UIStroke_7.Thickness = 1
-
-			UICorner_9.Parent = Toggle_1
-			UICorner_9.CornerRadius = UDim.new(0, 20)
-
-			UIPadding_7.Parent = Toggle_1
-			UIPadding_7.PaddingBottom = UDim.new(0, 15)
-			UIPadding_7.PaddingLeft = UDim.new(0, 15)
-			UIPadding_7.PaddingRight = UDim.new(0, 15)
-			UIPadding_7.PaddingTop = UDim.new(0, 15)
-
-			UIListLayout_12.Parent = Toggle_1
-			UIListLayout_12.FillDirection = Enum.FillDirection.Horizontal
-			UIListLayout_12.SortOrder = Enum.SortOrder.LayoutOrder
-			UIListLayout_12.VerticalAlignment = Enum.VerticalAlignment.Center
-			UIListLayout_12.HorizontalFlex = Enum.UIFlexAlignment.Fill
-
-			UIPadding_8.Parent = ElemContainer_1
-			UIPadding_8.PaddingBottom = UDim.new(0, 1)
-			UIPadding_8.PaddingLeft = UDim.new(0, 1)
-			UIPadding_8.PaddingRight = UDim.new(0, 1)
-			UIPadding_8.PaddingTop = UDim.new(0, 1)
-
-			Toggle_1.Name = "Toggle"
-			Toggle_1.Parent = ElemContainer_1
-			Toggle_1.AutomaticSize = Enum.AutomaticSize.Y
-			Toggle_1.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-			Toggle_1.BackgroundTransparency = 0.4000000059604645
-			Toggle_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Toggle_1.BorderSizePixel = 0
-			Toggle_1.Position = UDim2.new(0.0259433966, 0, 0, 0)
-			Toggle_1.Size = UDim2.new(0.930000007, 0, 0, 0)
-
-			Displays_1.Name = "Displays"
-			Displays_1.Parent = Toggle_1
-			Displays_1.AnchorPoint = Vector2.new(0, 0.5)
-			Displays_1.AutomaticSize = Enum.AutomaticSize.Y
-			Displays_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Displays_1.BackgroundTransparency = 1
-			Displays_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Displays_1.BorderSizePixel = 0
-			Displays_1.Position = UDim2.new(0.0125523014, -6, 0.5, 0)
-			Displays_1.Size = UDim2.new(0.763000011, 0, 0, 0)
-
-			IconHolder_1.Name = "IconHolder"
-			IconHolder_1.Parent = Displays_1
-			IconHolder_1.AnchorPoint = Vector2.new(0, 0.5)
-			IconHolder_1.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-			IconHolder_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			IconHolder_1.BorderSizePixel = 0
-			IconHolder_1.Position = UDim2.new(0, 0, 0.5, 0)
-			IconHolder_1.Size = UDim2.new(0, 50, 0, 50)
-			IconHolder_1.Visible = false
-
-			Icon_5.Name = "Icon"
-			Icon_5.Parent = IconHolder_1
-			Icon_5.AnchorPoint = Vector2.new(0.5, 0.5)
-			Icon_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Icon_5.BackgroundTransparency = 1
-			Icon_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Icon_5.BorderSizePixel = 0
-			Icon_5.LayoutOrder = -1
-			Icon_5.Position = UDim2.new(0.5, 0, 0.5, 0)
-			Icon_5.Size = UDim2.new(0, 30, 0, 30)
-			Icon_5.Image = "rbxassetid://10723424646"
-			Icon_5.ImageColor3 = Color3.fromRGB(220, 220, 220)
-
-			SignalHandler:HandleNil(Icon_5)
-
-			UICorner_6.Parent = IconHolder_1
-			UICorner_6.CornerRadius = UDim.new(0, 15)
-
-			Text_1.Name = "Text"
-			Text_1.Parent = Displays_1
-			Text_1.AutomaticSize = Enum.AutomaticSize.X
-			Text_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Text_1.BackgroundTransparency = 1
-			Text_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Text_1.BorderSizePixel = 0
-			Text_1.LayoutOrder = 2
-			Text_1.Position = UDim2.new(0.178094149, -6, 0, 0)
-			Text_1.Size = UDim2.new(0.279671192, 0, 1, 0)
-
-			UIListLayout_9.Parent = Text_1
-			UIListLayout_9.Padding = UDim.new(0, 5)
-			UIListLayout_9.SortOrder = Enum.SortOrder.LayoutOrder
-			UIListLayout_9.VerticalAlignment = Enum.VerticalAlignment.Center
-
-			Display_1.Name = "Display"
-			Display_1.Parent = Text_1
-			Display_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Display_1.BackgroundTransparency = 1
-			Display_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Display_1.BorderSizePixel = 0
-			Display_1.Position = UDim2.new(0, 0, 0.363013685, 0)
-			Display_1.Size = UDim2.new(1, 0, 0, 17)
-			Display_1.FontFace =
-				Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
-			Display_1.Text = Data.Title or Data.Name or "Toggle"
-			Display_1.TextColor3 = Color3.fromRGB(220, 220, 220)
-			Display_1.TextSize = 18
-			Display_1.TextXAlignment = Enum.TextXAlignment.Left
-
-			Description_1.Name = "Description"
-			Description_1.Parent = Text_1
-			Description_1.AutomaticSize = Enum.AutomaticSize.Y
-			Description_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Description_1.BackgroundTransparency = 1
-			Description_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Description_1.BorderSizePixel = 0
-			Description_1.Position = UDim2.new(0, 0, 0.5, 0)
-			Description_1.Size = UDim2.new(1, 0, 0, 0)
-			Description_1.Font = Enum.Font.GothamMedium
-			Description_1.Text = Data.Description or ""
-			Description_1.TextColor3 = Color3.fromRGB(180, 180, 180)
-			Description_1.TextSize = 16
-			Description_1.TextWrapped = true
-			Description_1.TextXAlignment = Enum.TextXAlignment.Left
-			Description_1.TextYAlignment = Enum.TextYAlignment.Top
-
-			SignalHandler:HandleNil(Description_1)
-
-			UIListLayout_10.Parent = Displays_1
-			UIListLayout_10.Padding = UDim.new(0, 10)
-			UIListLayout_10.FillDirection = Enum.FillDirection.Horizontal
-			UIListLayout_10.SortOrder = Enum.SortOrder.LayoutOrder
-			UIListLayout_10.VerticalAlignment = Enum.VerticalAlignment.Center
-
-			ToggleHolder_1.Name = "ToggleHolder"
-			ToggleHolder_1.Parent = Toggle_1
-			ToggleHolder_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			ToggleHolder_1.BackgroundTransparency = 1
-			ToggleHolder_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			ToggleHolder_1.BorderSizePixel = 0
-			ToggleHolder_1.LayoutOrder = 1
-			ToggleHolder_1.Position = UDim2.new(0.735639036, 0, 0, 0)
-			ToggleHolder_1.Size = UDim2.new(0, 110, 0, 45)
-
-			if Description_1.Text == "" then
-				Description_1.Visible = false
-
-				Description_1:GetPropertyChangedSignal("Text"):Connect(function(Text)
-					if Text == "" then
-						Description_1.Visible = false
-					else
-						Description_1.Visible = true
-					end
-				end)
-			end
-
-			--// Methods
-			function Methods:SetTitle(Text)
-				assert(Text, "No Text For 'SetTitle'")
-				Display_1.Text = tostring(Text)
-			end
-
-			function Methods:SetDescription(Text)
-				assert(Text, "No Text For 'SetDescription'")
-				Description_1.Text = tostring(Text)
-			end
-
-			return Methods
-		end
-
-		function Elements:NewSlider(Data)
-			local Slider_1 = Instance.new("Frame")
-			local Displays_2 = Instance.new("Frame")
-			local IconHolder_2 = Instance.new("Frame")
-			local Icon_6 = Instance.new("ImageLabel")
-			local UICorner_10 = Instance.new("UICorner")
-			local Text_2 = Instance.new("Frame")
-			local UIListLayout_13 = Instance.new("UIListLayout")
-			local Display_2 = Instance.new("TextLabel")
-			local Description_2 = Instance.new("TextLabel")
-			local UIListLayout_14 = Instance.new("UIListLayout")
-			local SliderHolder_1 = Instance.new("Frame")
-			local UIListLayout_15 = Instance.new("UIListLayout")
-			local SliderBar_1 = Instance.new("Frame")
-			local UICorner_11 = Instance.new("UICorner")
-			local ProgressBar_1 = Instance.new("Frame")
-			local UICorner_12 = Instance.new("UICorner")
-			local Frame_1 = Instance.new("Frame")
-			local UICorner_13 = Instance.new("UICorner")
-			local Description_3 = Instance.new("TextLabel")
-			local UIStroke_8 = Instance.new("UIStroke")
-			local UICorner_14 = Instance.new("UICorner")
-			local UIPadding_9 = Instance.new("UIPadding")
-			local UIListLayout_16 = Instance.new("UIListLayout")
-
-			Slider_1.Name = "Slider"
-			Slider_1.Parent = ElemContainer_1
-			Slider_1.AutomaticSize = Enum.AutomaticSize.Y
-			Slider_1.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-			Slider_1.BackgroundTransparency = 0.4000000059604645
-			Slider_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Slider_1.BorderSizePixel = 0
-			Slider_1.Position = UDim2.new(0.0259433966, 0, 0, 0)
-			Slider_1.Size = UDim2.new(0.930000007, 0, 0, 0)
-
-			Displays_2.Name = "Displays"
-			Displays_2.Parent = Slider_1
-			Displays_2.AnchorPoint = Vector2.new(0, 0.5)
-			Displays_2.AutomaticSize = Enum.AutomaticSize.Y
-			Displays_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Displays_2.BackgroundTransparency = 1
-			Displays_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Displays_2.BorderSizePixel = 0
-			Displays_2.Position = UDim2.new(0.0125523014, -6, 0.5, 0)
-			Displays_2.Size = UDim2.new(0.763000011, 0, 0, 0)
-
-			IconHolder_2.Name = "IconHolder"
-			IconHolder_2.Parent = Displays_2
-			IconHolder_2.AnchorPoint = Vector2.new(0, 0.5)
-			IconHolder_2.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-			IconHolder_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			IconHolder_2.BorderSizePixel = 0
-			IconHolder_2.Position = UDim2.new(0, 0, 0.5, 0)
-			IconHolder_2.Size = UDim2.new(0, 50, 0, 50)
-			IconHolder_2.Visible = false
-
-			Icon_6.Name = "Icon"
-			Icon_6.Parent = IconHolder_2
-			Icon_6.AnchorPoint = Vector2.new(0.5, 0.5)
-			Icon_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Icon_6.BackgroundTransparency = 1
-			Icon_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Icon_6.BorderSizePixel = 0
-			Icon_6.LayoutOrder = -1
-			Icon_6.Position = UDim2.new(0.5, 0, 0.5, 0)
-			Icon_6.Size = UDim2.new(0, 30, 0, 30)
-			Icon_6.Image = "rbxassetid://10723424646"
-			Icon_6.ImageColor3 = Color3.fromRGB(220, 220, 220)
-
-			UICorner_10.Parent = IconHolder_2
-			UICorner_10.CornerRadius = UDim.new(0, 15)
-
-			Text_2.Name = "Text"
-			Text_2.Parent = Displays_2
-			Text_2.AutomaticSize = Enum.AutomaticSize.XY
-			Text_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Text_2.BackgroundTransparency = 1
-			Text_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Text_2.BorderSizePixel = 0
-			Text_2.LayoutOrder = 2
-			Text_2.Position = UDim2.new(0.178094149, -6, 0, 0)
-			Text_2.Size = UDim2.new(0.279671192, 0, 1, 0)
-
-			UIListLayout_13.Parent = Text_2
-			UIListLayout_13.Padding = UDim.new(0, 5)
-			UIListLayout_13.SortOrder = Enum.SortOrder.LayoutOrder
-			UIListLayout_13.VerticalAlignment = Enum.VerticalAlignment.Center
-			UIListLayout_13.HorizontalFlex = Enum.UIFlexAlignment.Fill
-			UIListLayout_13.VerticalFlex = Enum.UIFlexAlignment.Fill
-
-			Display_2.Name = "Display"
-			Display_2.Parent = Text_2
-			Display_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Display_2.BackgroundTransparency = 1
-			Display_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Display_2.BorderSizePixel = 0
-			Display_2.Position = UDim2.new(0, 0, 0.363013685, 0)
-			Display_2.Size = UDim2.new(1, 0, 0, 17)
-			Display_2.FontFace =
-				Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
-			Display_2.Text = "Slider"
-			Display_2.TextColor3 = Color3.fromRGB(220, 220, 220)
-			Display_2.TextSize = 18
-			Display_2.TextXAlignment = Enum.TextXAlignment.Left
-
-			Description_2.Name = "Description"
-			Description_2.Parent = Text_2
-			Description_2.AutomaticSize = Enum.AutomaticSize.Y
-			Description_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Description_2.BackgroundTransparency = 1
-			Description_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Description_2.BorderSizePixel = 0
-			Description_2.Position = UDim2.new(0, 0, 0.5, 0)
-			Description_2.Size = UDim2.new(1, 0, 0, 0)
-			Description_2.Font = Enum.Font.GothamMedium
-			Description_2.Text = "Lorem Ipsum Dolor Amet"
-			Description_2.TextColor3 = Color3.fromRGB(180, 180, 180)
-			Description_2.TextSize = 16
-			Description_2.TextWrapped = true
-			Description_2.TextXAlignment = Enum.TextXAlignment.Left
-			Description_2.TextYAlignment = Enum.TextYAlignment.Top
-
-			UIListLayout_14.Parent = Displays_2
-			UIListLayout_14.Padding = UDim.new(0, 10)
-			UIListLayout_14.FillDirection = Enum.FillDirection.Horizontal
-			UIListLayout_14.SortOrder = Enum.SortOrder.LayoutOrder
-			UIListLayout_14.VerticalAlignment = Enum.VerticalAlignment.Center
-
-			SliderHolder_1.Name = "SliderHolder"
-			SliderHolder_1.Parent = Slider_1
-			SliderHolder_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			SliderHolder_1.BackgroundTransparency = 1
-			SliderHolder_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			SliderHolder_1.BorderSizePixel = 0
-			SliderHolder_1.LayoutOrder = 1
-			SliderHolder_1.Position = UDim2.new(0, 0, 0.820895493, 0)
-			SliderHolder_1.Size = UDim2.new(0, 372, 0, 28)
-
-			UIListLayout_15.Parent = SliderHolder_1
-			UIListLayout_15.FillDirection = Enum.FillDirection.Horizontal
-			UIListLayout_15.SortOrder = Enum.SortOrder.LayoutOrder
-			UIListLayout_15.VerticalAlignment = Enum.VerticalAlignment.Bottom
-
-			SliderBar_1.Name = "SliderBar"
-			SliderBar_1.Parent = SliderHolder_1
-			SliderBar_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			SliderBar_1.BackgroundTransparency = 0.8999999761581421
-			SliderBar_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			SliderBar_1.BorderSizePixel = 0
-			SliderBar_1.Position = UDim2.new(0, 0, 0.785714269, 0)
-			SliderBar_1.Size = UDim2.new(0, 277, 0, 6)
-
-			UICorner_11.Parent = SliderBar_1
-			UICorner_11.CornerRadius = UDim.new(1, 0)
-
-			ProgressBar_1.Name = "ProgressBar"
-			ProgressBar_1.Parent = SliderBar_1
-			ProgressBar_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			ProgressBar_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			ProgressBar_1.BorderSizePixel = 0
-			ProgressBar_1.Size = UDim2.new(0.600000024, 0, 1, 0)
-
-			UICorner_12.Parent = ProgressBar_1
-			UICorner_12.CornerRadius = UDim.new(1, 0)
-
-			Frame_1.Parent = ProgressBar_1
-			Frame_1.Active = true
-			Frame_1.AnchorPoint = Vector2.new(1, 0.5)
-			Frame_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Frame_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Frame_1.BorderSizePixel = 0
-			Frame_1.Position = UDim2.new(1, 0, 0.5, 0)
-			Frame_1.Size = UDim2.new(0, 10, 0, 10)
-
-			UICorner_13.Parent = Frame_1
-			UICorner_13.CornerRadius = UDim.new(1, 0)
-
-			Description_3.Name = "Description"
-			Description_3.Parent = SliderHolder_1
-			Description_3.AutomaticSize = Enum.AutomaticSize.XY
-			Description_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Description_3.BackgroundTransparency = 1
-			Description_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Description_3.BorderSizePixel = 0
-			Description_3.Position = UDim2.new(0.744623661, 0, 0.428571433, 0)
-			Description_3.Size = UDim2.new(0, 0, 0, 0)
-			Description_3.Font = Enum.Font.GothamMedium
-			Description_3.Text = "100"
-			Description_3.TextColor3 = Color3.fromRGB(180, 180, 180)
-			Description_3.TextSize = 16
-			Description_3.TextWrapped = true
-			Description_3.TextXAlignment = Enum.TextXAlignment.Right
-			Description_3.TextYAlignment = Enum.TextYAlignment.Top
-
-			UIStroke_8.Parent = Slider_1
-			UIStroke_8.Color = Color3.fromRGB(255, 255, 255)
-			UIStroke_8.Thickness = 1
-
-			UICorner_14.Parent = Slider_1
-			UICorner_14.CornerRadius = UDim.new(0, 20)
-
-			UIPadding_9.Parent = Slider_1
-			UIPadding_9.PaddingBottom = UDim.new(0, 15)
-			UIPadding_9.PaddingLeft = UDim.new(0, 15)
-			UIPadding_9.PaddingRight = UDim.new(0, 15)
-			UIPadding_9.PaddingTop = UDim.new(0, 15)
-
-			UIListLayout_16.Parent = Slider_1
-			UIListLayout_16.SortOrder = Enum.SortOrder.LayoutOrder
-			UIListLayout_16.VerticalAlignment = Enum.VerticalAlignment.Center
-		end
+		function Elements:NewSlider(Data) end
 
 		function Methods:NewDropdown(Data) end
 

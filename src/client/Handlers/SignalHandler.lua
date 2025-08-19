@@ -44,7 +44,7 @@ function Handler:HandleNil(Instance)
 	end
 end
 
-function Library:SafeCallback(Func, ContextName)
+function Handler:SafeCallback(Func, ContextName)
 	assert(Func, "Parameter is nil for 'SafeCallback'")
 
 	local Success, Error = pcall(Func)

@@ -45,7 +45,7 @@ end
 
 assert(Parent, "Failed to get gui parent")
 
-Library.GUI = Instance.new("ScreenGui")
+Library.GUI = InstanceHandler:NewInstance("ScreenGui")
 Library.GUI.Parent = Parent
 Library.GUI.ResetOnSpawn = false
 
@@ -77,17 +77,8 @@ function Library:Setup(Data)
 	return NavigationUI
 end
 
-function Library:SafeCallback(Func, ContextName)
-	assert(Func, "Parameter is nil for 'SafeCallback'")
-
-	local Success, Error = pcall(Func)
-
-	if not Success then
-		warn("[Aether Debug, " .. (ContextName or "unnamed") .. "]: " .. tostring(Error))
-	end
-end
-
 function Library:GetLucideIcon()
+	--//TODO: add lucide icons api
 	return nil
 end
 
