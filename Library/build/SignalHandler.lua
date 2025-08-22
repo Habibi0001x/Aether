@@ -14,9 +14,9 @@ function Handler:NewSignal(Instance, EventName, Callback)
 	return Connection
 end
 
-function Handler:NewClickSignal(Instance, Callback)
+function Handler:NewClickSignal(Instanced, Callback)
 	local Button = Instance.new("TextButton")
-	Button.Parent = Instance
+	Button.Parent = Instanced
 	Button.Size = UDim2.new(1, 0, 1, 0)
 	Button.BackgroundTransparency = 1
 	Button.Text = ""
