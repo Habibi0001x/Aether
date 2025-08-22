@@ -7,4 +7,8 @@
 > If you experience any issues then please dm me on discord at *severitysvc*
 
 # Credits
-[.ftgs (Icon Library)](https://github.com/Footagesus) 
+[.ftgs (for the Icon Library)](https://github.com/Footagesus) 
+
+# Socials
+[Discord Server](https://discord.gg/cdGfgsaD5b) 
+[Youtube Channel](www.youtube.com/@Severity-Svc)
