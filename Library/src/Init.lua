@@ -38,10 +38,6 @@ local AnimationHandler = Import("build/AnimationHandler")
 local InstanceHandler = Import("build/InstanceHandler")
 local Icons = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/main/Main.lua"))() --// Creds: .ftgs
 
-assert(Succes, "Failed to fetch Icons module: " .. tostring(Result))
-
---//TODO: add import
-
 --// Core
 Library.CloneRef = cloneref or function(Object)
 	assert(Object, "No object found for 'CloneRef'")

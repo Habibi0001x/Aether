@@ -40,7 +40,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sever
 
 ---
 
-## 🛠️ API Reference
+##  API Reference
 
 ### Library
 
@@ -196,8 +196,8 @@ local Dropdown = Tab:CreateDropdown({
 > [!WARNING]
 > ⚠️ The Dropdown automatically updates. if you want it to change then set the Values to a table variable and change that table.
 
-* `Dropdown:SetDesc("Hello World")` → Sets the description of the specified Button to the text param.
-* `Dropdown:SetTitle("Hello World")` → Sets the Title of the specified Button to the text param.
+* `Dropdown:SetDesc("Hello World")` → Sets the description of the specified Dropdown to the text param.
+* `Dropdown:SetTitle("Hello World")` → Sets the Title of the specified Dropdown to the text param.
 * `(In the Future) Dropdown:Select()` → calls the callback function without needing to click anymore ( not sure if anyone needs this but yes )
 
 
@@ -217,5 +217,7 @@ local Slider = Tab:CreateSlider({
 })
 ```
 
-
+* `Dropdown:SetDesc("Hello World")` → Sets the description of the specified Slider to the text param.
+* `Dropdown:SetTitle("Hello World")` → Sets the Title of the specified Slider to the text param.
+* `Slider:SetValue(100)")` → Sets the value to the set parameter
 
