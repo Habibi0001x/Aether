@@ -17,35 +17,45 @@ function Notification.New(Library)
 	return self
 end
 
-function Notification:Push(data)
-	table.insert(self.Queue, data)
-	self:_ProcessQueue()
+function Notification:Push(Data)
+	table.insert(self.Queue, Data)
+	self:Queue()
 end
 
-function Notification:_ProcessQueue()
+function Notification:Queue()
 	if self.Notifying or #self.Queue == 0 then
 		return
 	end
+
 	self.Notifying = true
 
-	local data = table.remove(self.Queue, 1)
-	local Body = self:_CreateNotificationUI(data)
+	local Data = table.remove(self.Queue, 1)
+	local Body = self:Init(Data)
 
-	self.Library.AnimationHandler:Tween(Body, { Size = UDim2.new(0, 250, 0, 50) }, 0.3)
+	self.Library.AnimationHandler:Animate(
+		Body,
+		TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)({ Size = UDim2.new(0, 250, 0, 50) }),
+		0.3
+	)
 
-	task.delay(data.Duration or 3, function()
+	task.delay(Data.Duration or 3, function()
 		if Body and Body.Parent then
-			self.Library.AnimationHandler:Animate(Body, { Size = UDim2.new(0, 0, 0, 0) }, 0.3)
+			self.Library.AnimationHandler:Animate(
+				Body,
+				TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{ Size = UDim2.new(0, 0, 0, 0) },
+				0.3
+			)
 
 			task.delay(0.3, function()
 				Body:Destroy()
 				self.Notifying = false
-				self:_ProcessQueue()
+				self:Queue()
 			end)
 		end
 	end)
 end
 
-function Notification:_CreateNotificationUI(Data) end
+function Notification:Init(Data) end
 
 return Notification

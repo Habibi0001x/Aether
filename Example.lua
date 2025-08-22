@@ -19,41 +19,12 @@ local CombatTab = Navigator:CreateTab({
 	Icon = "rbxassetid://10734975692",
 })
 
-local CombatT22222222ab = Navigator:CreateTab({
+local Utility = Navigator:CreateTab({
 	Title = "Utility Tab",
 	Icon = "rbxassetid://10709759764",
 })
 
-local Co2mbatTab = Navigator:CreateTab({
-	Title = "World Tab",
-	Icon = "rbxassetid://10734897956",
-})
-
-local CombatTab = Navigator:CreateTab({
-	Title = "Combat Tab",
-	Icon = "rbxassetid://10734975692",
-})
-
-local CombatT22222222ab = Navigator:CreateTab({
-	Title = "Utility Tab",
-	Icon = "rbxassetid://10709759764",
-})
-
-local Co2mbatTab = Navigator:CreateTab({
-	Title = "World Tab",
-	Icon = "rbxassetid://10734897956",
-})
-local CombatTab = Navigator:CreateTab({
-	Title = "Combat Tab",
-	Icon = "rbxassetid://10734975692",
-})
-
-local CombatT22222222ab = Navigator:CreateTab({
-	Title = "Utility Tab",
-	Icon = "rbxassetid://10709759764",
-})
-
-local Co2mbatTab = Navigator:CreateTab({
+local World = Navigator:CreateTab({
 	Title = "World Tab",
 	Icon = "rbxassetid://10734897956",
 })

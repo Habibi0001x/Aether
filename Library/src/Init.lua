@@ -6,11 +6,10 @@ if shared.Library then
 	shared.Library = Library
 end
 
-shared.Import = function(FileName, Extension)
+local Import = function(FileName, Extension)
 	local BaseURL = "https://raw.githubusercontent.com/Severity-svc2/Aether/refs/heads/main/Library/"
 	local FileExtension = Extension or ".lua"
-
-	local Path = BaseURL .. FileName .. Extension
+	local Path = BaseURL .. FileName .. FileExtension
 
 	local Success, Response = pcall(function()
 		return game:HttpGet(Path)
@@ -18,16 +17,14 @@ shared.Import = function(FileName, Extension)
 
 	if Success and Response then
 		if Response:find("<html>") then
-			error("invalid response: " .. Path)
+			error("Invalid response: " .. Path)
 		end
-
 		return loadstring(Response)()
 	else
-		error("failed to fetch file " .. Path)
+		error("Failed to fetch file " .. Path)
 	end
 end
 
-local Import = shared.Import
 Library.Import = Import
 
 --// Modules
