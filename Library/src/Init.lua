@@ -124,7 +124,7 @@ function Library:GetIcon(IconName) --// Credits: .ftgs for the icon Library
 		}
 	end
 
-	local Icon = Icons.Icon(IconName)
+	local Icon = Icons.Icon(tostring(IconName:lower()))
 
 	return {
 		Image = Icon[1],
