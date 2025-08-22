@@ -128,7 +128,7 @@ function Library:GetIcon(IconName)
 	local Icon = Icons.Icon(tostring(IconName):lower())
 	--// assert(Icon and Icon[1] and Icon[2], "Invalid icon name: " .. tostring(IconName))
 
-	if not Icon and not Icon[1] and not Icon[2] then
+	if not Icon then
 		return {
 			Image = "",
 			ImageRectPosition = Vector2.new(0, 0),
