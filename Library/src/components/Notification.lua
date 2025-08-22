@@ -186,14 +186,13 @@ function Notification:Init(Data)
 	Title_1.Position = UDim2.new(0.0182648394, 0, 0.111111112, 0)
 	Title_1.Size = UDim2.new(0, 0, 1, 0)
 	Title_1.Font = Enum.Font.GothamMedium
-	Title_1.Text = "  20:30:52.519  DataStoreService is not a valid member of ServerStorage "
-	ServerStorage("  -  Server - GameServer:5")
+	Title_1.Text = Data.Content
 	Title_1.TextColor3 = Color3.fromRGB(220, 220, 220)
 	Title_1.TextSize = 15
 	Title_1.TextTruncate = Enum.TextTruncate.AtEnd
 
 	UISizeConstraint_1.Parent = Content_1
-	UISizeConstraint_1.MaxSize = Vector2.new(775, INF)
+	UISizeConstraint_1.MaxSize = Vector2.new(775, math.huge)
 
 	Title_2.Name = "Title"
 	Title_2.Parent = Notification_1

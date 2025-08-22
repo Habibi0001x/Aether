@@ -114,7 +114,7 @@ function Library:Setup(Data)
 end
 
 function Library:GetIcon(IconName) --// Credits: .ftgs for the icon Library
-	assert(IconName, "No icon passed for 'GetIcon'")
+	assert(IconName and IconName ~= "", "No icon passed for 'GetIcon'")
 	if type(IconName) == "string" and IconName:find("rbxassetid") then
 		return {
 			Image = IconName,
@@ -124,6 +124,7 @@ function Library:GetIcon(IconName) --// Credits: .ftgs for the icon Library
 	end
 
 	local Icon = Icons.Icon(string.lower(IconName))
+	print(type(Icon))
 
 	return {
 		Image = Icon[1],

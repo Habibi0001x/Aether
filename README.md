@@ -159,7 +159,7 @@ local Toggle = Tab:CreateToggle({
 #### Buttons
 
 ```lua
-locak Button = Tab:CreateButton({
+local Button = Tab:CreateButton({
 	Title = "Button Example", --// Default: ""
 	Icon = "clock", --// Default: ""
 	Description = "This is a button", --// Default: ""
