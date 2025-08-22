@@ -34,7 +34,7 @@ local SignalHandler = Import("build/SignalHandler")
 local AnimationHandler = Import("build/AnimationHandler")
 local InstanceHandler = Import("build/InstanceHandler")
 local Icons = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/main/Main.lua"))() --// Creds: .ftgs
-Icons:SetIconsType("lucide")
+Icons.SetIconsType("lucide")
 
 --// Core
 Library.CloneRef = cloneref or function(Object)
@@ -125,7 +125,7 @@ function Library:GetIcon(IconName) --// Credits: .ftgs for the icon Library
 	end
 
 	local Icon = Icons.Icon(IconName)
-	print(type(Icon))
+	assert(Icon, "icon is nil")
 
 	return {
 		Image = Icon[1],
