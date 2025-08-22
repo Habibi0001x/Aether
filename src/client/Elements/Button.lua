@@ -67,18 +67,18 @@ function Button:Init(Data)
 	IconHolder.Position = UDim2.new(0, 0, 0.5, 0)
 	IconHolder.Size = UDim2.new(0, 50, 0, 50)
 
+	local Icon2 = Library:GetIcon(Data.Icon) or ""
+
 	Icon.Name = "Icon"
 	Icon.Parent = IconHolder
 	Icon.AnchorPoint = Vector2.new(0.5, 0.5)
-	Icon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Icon.BackgroundTransparency = 1.000
-	Icon.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Icon.BorderSizePixel = 0
-	Icon.LayoutOrder = -1
+	Icon.BackgroundTransparency = 1
 	Icon.Position = UDim2.new(0.5, 0, 0.5, 0)
-	Icon.Size = UDim2.new(0, 30, 0, 30)
-	Icon.Image = Data.Icon or ""
-	Icon.ImageColor3 = Color3.fromRGB(220, 220, 220)
+	Icon.Size = UDim2.new(0, 27, 0, 27)
+	Icon.Image = Icon2.Image
+	Icon.ImageTransparency = 0.3
+	Icon.ImageRectOffset = Icon2.ImageRectPosition
+	Icon.ImageRectSize = Icon2.ImageRectSize
 
 	SignalHandler:HandleNil(Icon, IconHolder)
 
@@ -189,24 +189,39 @@ function Button:Init(Data)
 	ManualStroke.Color = Color3.fromRGB(255, 255, 255)
 
 	local Callback = Data.Callback
+	local AbsoluteSize = Button.AbsoluteSize
 	--// assert(Callback, "No callback for '".. Displays.Text .. "', ended thread")
 
 	SignalHandler:HandleChange(Displays, ButtonHolder)
 
 	SignalHandler:NewSignal(Button, "MouseButton1Click", function()
 		SignalHandler:SafeCallback(Callback, nil, Data.Title)
+
+		AnimHandler:Animate(
+			Button,
+			TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{ Size = UDim2.fromOffset(AbsoluteSize.X - 5, AbsoluteSize.Y - 5) }
+		)
+
+		task.delay(0.1, function(args)
+			AnimHandler:Animate(
+				Button,
+				TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{ Size = UDim2.fromOffset(AbsoluteSize.X, 0) }
+			)
+		end)
 	end)
 
 	return {
-		SetDescription = function(Text)
+		SetDescription = function(_, Text)
 			Description.Text = Text
 		end,
 
-		SetTitle = function(Text)
+		SetTitle = function(_, Text)
 			Display.Text = Text
 		end,
 
-		Callback = function(Bool)
+		Callback = function()
 			SignalHandler:SafeCallback(Callback, nil, Data.Title)
 		end,
 	}

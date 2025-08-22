@@ -30,7 +30,7 @@ function Slider:Init(Data)
 	local UIListLayout_2 = Instance.new("UIListLayout")
 	local SliderHolder = Instance.new("Frame")
 	local UIListLayout_3 = Instance.new("UIListLayout")
-	local SliderBar = Instance.new("Frame")
+	local SliderBar = Instance.new("TextButton")
 	local UICorner_2 = Instance.new("UICorner")
 	local ProgressBar = Instance.new("Frame")
 	local UICorner_3 = Instance.new("UICorner")
@@ -72,18 +72,18 @@ function Slider:Init(Data)
 	IconHolder.Size = UDim2.new(0, 50, 0, 50)
 	IconHolder.Visible = false
 
+	local Icon2 = Library:GetIcon(Data.Icon) or ""
+
 	Icon.Name = "Icon"
 	Icon.Parent = IconHolder
 	Icon.AnchorPoint = Vector2.new(0.5, 0.5)
-	Icon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Icon.BackgroundTransparency = 1.000
-	Icon.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Icon.BorderSizePixel = 0
-	Icon.LayoutOrder = -1
+	Icon.BackgroundTransparency = 1
 	Icon.Position = UDim2.new(0.5, 0, 0.5, 0)
-	Icon.Size = UDim2.new(0, 30, 0, 30)
-	Icon.Image = Data.Icon or ""
-	Icon.ImageColor3 = Color3.fromRGB(220, 220, 220)
+	Icon.Size = UDim2.new(0, 27, 0, 27)
+	Icon.Image = Icon2.Image
+	Icon.ImageTransparency = 0.3
+	Icon.ImageRectOffset = Icon2.ImageRectPosition
+	Icon.ImageRectSize = Icon2.ImageRectSize
 
 	SignalHandler:HandleNil(Icon, IconHolder)
 
@@ -156,8 +156,14 @@ function Slider:Init(Data)
 	SliderHolder.BorderSizePixel = 0
 	SliderHolder.LayoutOrder = 1
 	SliderHolder.Position = UDim2.new(0, 0, 0.820895493, 0)
-	SliderHolder.Size = UDim2.new(0, 372, 0, 0)
-	SliderBar.AutomaticSize = Enum.AutomaticSize.Y
+	SliderHolder.Size = UDim2.new(1, 0, 0, 0)
+	SliderHolder.AutomaticSize = Enum.AutomaticSize.Y
+
+	local ManualPad2 = Instance.new("UIPadding")
+	ManualPad2.Parent = SliderHolder
+	ManualPad2.PaddingLeft = UDim.new(0, 10)
+	ManualPad2.PaddingRight = UDim.new(0, 10)
+	ManualPad2.PaddingTop = UDim.new(0, 10)
 
 	UIListLayout_3.Parent = SliderHolder
 	UIListLayout_3.FillDirection = Enum.FillDirection.Horizontal
@@ -172,6 +178,7 @@ function Slider:Init(Data)
 	SliderBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	SliderBar.BorderSizePixel = 0
 	SliderBar.Position = UDim2.new(0, 0, 0.785714269, 0)
+	SliderBar.Text = ""
 	SliderBar.Size = UDim2.new(0, 277, 0, 6)
 
 	UICorner_2.CornerRadius = UDim.new(1, 0)
@@ -183,6 +190,10 @@ function Slider:Init(Data)
 	ProgressBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	ProgressBar.BorderSizePixel = 0
 	ProgressBar.Size = UDim2.new(0.600000024, 0, 1, 0)
+
+	local ManualPad = Instance.new("UIPadding")
+	ManualPad.Parent = ProgressBar
+	ManualPad.PaddingLeft = UDim.new(0, 10)
 
 	UICorner_3.CornerRadius = UDim.new(1, 0)
 	UICorner_3.Parent = ProgressBar
@@ -199,7 +210,7 @@ function Slider:Init(Data)
 	UICorner_4.CornerRadius = UDim.new(1, 0)
 	UICorner_4.Parent = Dot
 
-	Value.Name = "Description"
+	Value.Name = "Value"
 	Value.Parent = SliderHolder
 	Value.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Value.BackgroundTransparency = 1.000
@@ -207,7 +218,7 @@ function Slider:Init(Data)
 	Value.BorderSizePixel = 0
 	Value.Position = UDim2.new(0.744623661, 0, 0.428571433, 0)
 	Value.Font = Enum.Font.GothamMedium
-	Value.Text = "100"
+	Value.Text = ""
 	Value.TextColor3 = Color3.fromRGB(180, 180, 180)
 	Value.TextSize = 16.000
 	Value.TextWrapped = true
@@ -234,18 +245,87 @@ function Slider:Init(Data)
 	ManualStroke.Transparency = 0.9
 	ManualStroke.Color = Color3.fromRGB(255, 255, 255)
 
-	SignalHandler:HandleChange(Displays, SliderHolder)
+	--// SignalHandler:HandleChange(Displays, SliderHolder)
 
 	--// Setup
-	local Callback = Data.Callback
-	local Min = Data.Min
-	local Max = Data.Max
-	local Step = Data.Step
-	local Default = Data.Default or Min
+	SliderBar.AutoButtonColor = false
 
-	SignalHandler:NewClickSignal(SliderBar, function()
-		--//TODO: Implement Slider Logic
+	local Callback = Data.Callback
+	local MinValue = Data.Min or 0
+	local MaxValue = Data.Max
+	local Step = Data.Step
+	local Default = Data.Default or MinValue
+
+	local CurrentValue = Default or MinValue
+	local IsDragging = false
+
+	if Default ~= nil then
+		local PercentValue = (Default - MinValue) / (MaxValue - MinValue)
+		ProgressBar.Size = UDim2.new(PercentValue, 0, 1, 0)
+		Value.Text = tostring(Default)
+
+		SignalHandler:SafeCallback(Callback, CurrentValue, Data.Title)
+	end
+
+	SignalHandler:NewSignal(SliderBar, "MouseButton1Down", function()
+		IsDragging = true
 	end)
+
+	SignalHandler:NewSignal(Library.Services.UserInputService, "InputEnded", function(Input)
+		if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+			IsDragging = false
+		end
+	end)
+
+	SignalHandler:NewSignal(Library.Services.RunService, "Heartbeat", function(Input)
+		if IsDragging then
+			local MouseX = Library.Services.UserInputService:GetMouseLocation().X
+			local AbsolutePosition = SliderBar.AbsolutePosition.X
+			local AbsoluteSize = SliderBar.AbsoluteSize.X
+			local PercentValue = math.clamp((MouseX - AbsolutePosition) / AbsoluteSize, 0, 1)
+
+			CurrentValue = math.floor(((MinValue + ((MaxValue - MinValue) * PercentValue)) / Step) + 0.5) * Step
+
+			local Precision = math.max(0, math.floor(math.log10(1 / Step) + 0.5))
+			Value.Text = string.format("%." .. tostring(Precision) .. "f", CurrentValue)
+
+			AnimHandler:Animate(
+				ProgressBar,
+				TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{ Size = UDim2.new(PercentValue, 0, 1, 0) }
+			)
+
+			SignalHandler:SafeCallback(Callback, CurrentValue, Data.Title)
+		end
+	end)
+
+	return {
+		SetDescription = function(_, Text)
+			Description.Text = Text
+		end,
+
+		SetTitle = function(_, Text)
+			Display.Text = Text
+		end,
+
+		SetValue = function(_, NewValue)
+			local Clamped = math.clamp(NewValue, MinValue, MaxValue)
+			CurrentValue = math.floor((Clamped / Step) + 0.5) * Step
+
+			local PercentValue = (CurrentValue - MinValue) / (MaxValue - MinValue)
+
+			local Precision = math.max(0, math.floor(math.log10(1 / Step) + 0.5))
+			Value.Text = string.format("%." .. tostring(Precision) .. "f", CurrentValue)
+
+			AnimHandler:Animate(
+				ProgressBar,
+				TweenInfo.new(0.1, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
+				{ Size = UDim2.new(PercentValue, 0, 1, 0) }
+			)
+
+			SignalHandler:SafeCallback(Callback, CurrentValue, Data.Title)
+		end,
+	}
 end
 
 return Slider

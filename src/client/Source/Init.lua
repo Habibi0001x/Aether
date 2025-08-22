@@ -1,3 +1,4 @@
+local HttpService = game:GetService("HttpService")
 local UserInputService = game:GetService("UserInputService")
 local Library = {}
 Library.__index = Library
@@ -8,9 +9,6 @@ local WindowModule = require(script.Parent:WaitForChild("Window"))
 local SignalHandler = require(script.Parent.Parent:WaitForChild("Handlers"):WaitForChild("SignalHandler"))
 local AnimationHandler = require(script.Parent.Parent:WaitForChild("Handlers"):WaitForChild("AnimationHandler"))
 local InstanceHandler = require(script.Parent.Parent:WaitForChild("Handlers"):WaitForChild("InstanceHandler"))
-
---// Temp
-local Lucide = require(script.Parent.Parent:WaitForChild("Config"):WaitForChild("Icons"))
 
 if shared.Library then
 	shared.Library:Uninject()
@@ -31,6 +29,7 @@ Library.Services = {
 	RunService = Library.CloneRef(game:GetService("RunService")) :: RunService,
 	Players = Library.CloneRef(game:GetService("Players")) :: Players,
 	UserInputService = Library.CloneRef(game:GetService("UserInputService")) :: UserInputService,
+	HttpService = Library.CloneRef(game:GetService("HttpService")) :: HttpService,
 }
 
 Library.Font = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal) --//TODO: add :ChangeFont
@@ -50,8 +49,22 @@ else
 end
 
 assert(Parent, "Failed to get gui parent")
-Library.GUI =
-	InstanceHandler:New("ScreenGui", { Parent = Parent, ResetOnSpawn = false, IgnoreGuiInset = true, Name = "Aether" })
+Library.GUI = InstanceHandler:New("ScreenGui", {
+	Parent = Parent,
+	ResetOnSpawn = false,
+	IgnoreGuiInset = true,
+	Name = "Aether",
+	--// ZIndexBehaviour = Enum.ZIndexBehavior.Sibling,
+})
+
+Library.DropdownUI = InstanceHandler:New("Frame", {
+	Parent = Library.GUI,
+	Size = UDim2.new(1, 0, 1, 0),
+	BackgroundTransparency = 1,
+	Name = "DropdownUI",
+	ZIndex = 2,
+	Visible = true,
+})
 
 --// Methods
 function Library:Setup(Data)
@@ -65,51 +78,58 @@ function Library:Setup(Data)
 
 	local Navigator = NavigationModule.New(Library)
 	local Window = WindowModule.New(Library):Init({
-		Title = Data.Window.Title or Data.Window.Name or "",
-		Icon = self:GetLucideIcon(Data.Window.Icon or Data.Window.Image or ""),
+		Title = Data.Window.Title or Data.Window.Icon or "",
+		Icon = self:GetIcon(Data.Window.Icon or Data.Window.Image or "") or "",
 		Size = Data.Window.Size or Data.Window.WindowSize or UDim2.fromOffset(425, 520),
 	})
 
 	shared.Window = Window
 
 	local NavigationUI = Navigator:Init({
-		BarSection = Data.BarSection or Data.BarAlignament,
-		TagsSection = Data.TagsSection or Data.TagsAlignament,
-		MiscSection = Data.MiscSection or Data.MiscAlignament,
+		BarSection = Data.BarSection or Data.BarAligIconnt,
+		TagsSection = Data.TagsSection or Data.TagsAligIconnt,
+		MiscSection = Data.MiscSection or Data.MiscAligIconnt,
 	})
 
 	return NavigationUI
 end
 
-function Library:GetLucideIcon(Icon)
-	assert(Icon, "No icon passed for 'GetLucideIcon'")
-	if type(Icon) ~= "string" then
-		return
-	end
+function Library:GetIcon(IconName) --// Credits: .ftgs for the icon Library
+	if not Services.RunService:IsStudio() then
+		local Succes, Result = pcall(function()
+			return HttpService:GetAsync("https://raw.githubusercontent.com/Footagesus/Icons/main/Main.lua")
+		end)
 
-	if Icon:find("rbxassetid") then
-		return Icon
-	else
-		if Services.RunService:IsStudio() then
-			for Name, AssetId in pairs(Lucide) do
-				if Name:lower():find(Icon:lower()) then
-					return AssetId
-				end
-			end
-		else
-			local Url =
-				game:HttpGet("https://raw.githubusercontent.com/Habibi0001x/lucide-icons-/refs/heads/main/icons") --// Credits: Fluent
-			local Data = loadstring(Url)() --//TODO: move these outside the thread
+		assert(Succes, "Failed to fetch Icons module: " .. tostring(Result))
 
-			for Name, AssetId in pairs(Data) do
-				if Name:lower():find(Icon:lower()) then
-					return AssetId
-				end
-			end
+		local Icons = loadstring(Result)()
+		Icons.SetIconsType("lucide") --// Default
+
+		function Library:GetIcon(IconName) --// Credits: .ftgs for the icon Library
+			assert(IconName, "No icon passed for 'GetIcon'")
+			local Icon = Icons.Icon(string.lower(IconName))
+
+			return {
+				Image = Icon[1],
+				ImageRectSize = Icon[2].ImageRectSize,
+				ImageRectPosition = Icon[2].ImageRectPosition,
+			}
 		end
-	end
+	else
+		if type(IconName) == "string" and IconName:find("rbxassetid") then
+			return {
+				Image = IconName,
+				ImageRectPosition = Vector2.new(0, 0),
+				ImageRectSize = Vector2.new(0, 0),
+			}
+		end
 
-	return "rbxassetid://0"
+		return {
+			Image = "",
+			ImageRectPosition = Vector2.new(0, 0),
+			ImageRectSize = Vector2.new(0, 0),
+		}
+	end
 end
 
 function Library:Uninject()

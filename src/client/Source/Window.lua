@@ -25,6 +25,7 @@ function Window:Init(DataEnd)
 	local ToggleModule = require(script.Parent.Parent:WaitForChild("Elements"):WaitForChild("Toggle"))
 	local ButtonModule = require(script.Parent.Parent:WaitForChild("Elements"):WaitForChild("Button"))
 	local SliderModule = require(script.Parent.Parent:WaitForChild("Elements"):WaitForChild("Slider"))
+	local DropdownModule = require(script.Parent.Parent:WaitForChild("Elements"):WaitForChild("Dropdown"))
 
 	assert(SignalHandler, "No signal handler found for 'Init'")
 	assert(AnimHandler, "No animation handler found for 'Init'")
@@ -164,6 +165,8 @@ function Window:Init(DataEnd)
 	Title_2.TextColor3 = Color3.fromRGB(220, 220, 220)
 	Title_2.TextSize = 15
 
+	local Logo = Library:GetIcon(DataEnd.Logo or DataEnd.Icon or "") or ""
+
 	Icon_1.Name = "Icon"
 	Icon_1.Parent = Title_1
 	Icon_1.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -173,8 +176,10 @@ function Window:Init(DataEnd)
 	Icon_1.BorderSizePixel = 0
 	Icon_1.Position = UDim2.new(0.5, 0, 0.5, 0)
 	Icon_1.Size = UDim2.new(0, 22, 0, 22)
-	Icon_1.Image = Library:GetLucideIcon(DataEnd.Logo or DataEnd.Icon or "") or ""
+	Icon_1.Image = Logo.Image
 	Icon_1.ImageTransparency = 0.30000001192092896
+	Icon_1.ImageRectSize = Logo.ImageRectSize
+	Icon_1.ImageRectOffset = Logo.ImageRectPosition
 
 	SignalHandler:HandleNil(Icon_1)
 
@@ -520,7 +525,10 @@ function Window:Init(DataEnd)
 			Slider:Init(Data)
 		end
 
-		function Elements:NewDropdown(Data) end
+		function Elements:NewDropdown(Data)
+			local Dropdown = DropdownModule.New(Library, ElemContainer_1)
+			Dropdown:Init(Data)
+		end
 
 		function Elements:NewParagraph(Data) end
 
@@ -602,7 +610,7 @@ function Window:Init(DataEnd)
 
 				AnimHandler:Animate(
 					Container_1,
-					TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+					TweenInfo.new(0.75, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
 					{ CanvasPosition = Vector2.new(Container_1.AbsoluteSize.X * tonumber(Index), 0) }
 				)
 			end
@@ -611,7 +619,7 @@ function Window:Init(DataEnd)
 
 			AnimHandler:Animate(
 				Container_1,
-				TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				TweenInfo.new(0.75, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
 				{ CanvasPosition = Vector2.new(Container_1.AbsoluteSize.X * tonumber(Index), 0) }
 			)
 		end

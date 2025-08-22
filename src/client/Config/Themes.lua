@@ -4,6 +4,8 @@ local Themes = {
 	["Light"] = {},
 
 	["Violet"] = {},
-} --//TODO: add themes
+}
+
+--//TODO: add themes
 
 return Themes

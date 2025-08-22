@@ -248,14 +248,18 @@ function NavigationEnd:Init(EndData)
 		UIStroke_2.Color = Color3.fromRGB(255, 255, 255)
 		UIStroke_2.Thickness = 1
 
+		local Icon = Library:GetIcon(Data.Icon) or ""
+
 		Icon_2.Name = "Icon"
 		Icon_2.Parent = Tab_1
 		Icon_2.AnchorPoint = Vector2.new(0.5, 0.5)
 		Icon_2.BackgroundTransparency = 1
 		Icon_2.Position = UDim2.new(0.5, 0, 0.5, 0)
 		Icon_2.Size = UDim2.new(0, 27, 0, 27)
-		Icon_2.Image = Library:GetLucideIcon(Data.Icon)
+		Icon_2.Image = Icon.Image
 		Icon_2.ImageTransparency = 0.3
+		Icon_2.ImageRectOffset = Icon.ImageRectPosition
+		Icon_2.ImageRectSize = Icon.ImageRectSize
 
 		Identifier_1.Name = "Identifier"
 		Identifier_1.Parent = Tab_1
@@ -429,7 +433,7 @@ function NavigationEnd:Init(EndData)
 		function New:CreateToggle(Data)
 			WindowContext:NewToggle({
 				Title = Data.Title or Data.Name or "",
-				Icon = Library:GetLucideIcon(Data.Icon or ""),
+				Icon = (Data.Icon or ""),
 				Description = Data.Description or Data.Desc or "",
 				Default = Data.Default or Data.DefaultaValue or false,
 				Callback = Data.Callback,
@@ -439,7 +443,7 @@ function NavigationEnd:Init(EndData)
 		function New:CreateButton(Data)
 			WindowContext:NewButton({
 				Title = Data.Title or Data.Name or "",
-				Icon = Library:GetLucideIcon(Data.Icon or ""),
+				Icon = (Data.Icon or ""),
 				Description = Data.Description or Data.Desc or "",
 				Callback = Data.Callback,
 			})
@@ -448,12 +452,25 @@ function NavigationEnd:Init(EndData)
 		function New:CreateSlider(Data)
 			WindowContext:NewSlider({
 				Title = Data.Title or Data.Name,
-				Icon = Library:GetLucideIcon(Data.Icon or ""),
+				Icon = (Data.Icon or ""),
 				Description = Data.Description or Data.Desc,
-				MinValue = Data.MinValue or Data.Min,
-				MaxValue = Data.MaxValue or Data.Max,
+				Min = Data.MinValue or Data.Min,
+				Max = Data.MaxValue or Data.Max,
 				Step = Data.Step or Data.Increment,
 				Default = Data.Default or Data.DefaultaValue,
+				Callback = Data.Callback,
+			})
+		end
+
+		function New:CreateDropdown(Data)
+			WindowContext:NewDropdown({
+				Title = Data.Title or Data.Name,
+				Icon = (Data.Icon or ""),
+				Description = Data.Description or Data.Desc,
+				Values = Data.Values or {},
+				Value = Data.Value or nil,
+				AllowNone = Data.AllowNone or false,
+				Multi = Data.Multi or { Enabled = false, ShadowSelected = false },
 				Callback = Data.Callback,
 			})
 		end

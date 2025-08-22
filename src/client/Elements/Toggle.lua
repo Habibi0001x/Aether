@@ -73,18 +73,18 @@ function Toggle:Init(Data)
 	IconHolder_1.Size = UDim2.new(0, 50, 0, 50)
 	IconHolder_1.Visible = false
 
+	local Icon = Library:GetIcon(Data.Icon) or ""
+
 	Icon_1.Name = "Icon"
 	Icon_1.Parent = IconHolder_1
 	Icon_1.AnchorPoint = Vector2.new(0.5, 0.5)
-	Icon_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Icon_1.BackgroundTransparency = 1
-	Icon_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Icon_1.BorderSizePixel = 0
-	Icon_1.LayoutOrder = -1
 	Icon_1.Position = UDim2.new(0.5, 0, 0.5, 0)
-	Icon_1.Size = UDim2.new(0, 30, 0, 30)
-	Icon_1.Image = Data.Icon or ""
-	Icon_1.ImageColor3 = Color3.fromRGB(220, 220, 220)
+	Icon_1.Size = UDim2.new(0, 27, 0, 27)
+	Icon_1.Image = Icon.Image
+	Icon_1.ImageTransparency = 0.3
+	Icon_1.ImageRectOffset = Icon.ImageRectPosition
+	Icon_1.ImageRectSize = Icon.ImageRectSize
 
 	SignalHandler:HandleNil(Icon_1, IconHolder_1)
 
@@ -271,15 +271,15 @@ function Toggle:Init(Data)
 	end)
 
 	return {
-		SetDescription = function(Text)
+		SetDescription = function(_, Text)
 			Description_1.Text = Text
 		end,
 
-		SetTitle = function(Text)
+		SetTitle = function(_, Text)
 			Display_1.Text = Text
 		end,
 
-		Set = function(Bool)
+		Set = function(_, Bool)
 			HandleTransition(Bool)
 			SignalHandler:SafeCallback(Callback, Bool, Data.Title)
 		end,
