@@ -99,7 +99,7 @@ function Library:Setup(Data)
 	local Navigator = NavigationModule.New(Library)
 	local Window = WindowModule.New(Library):Init({
 		Title = Data.Window.Title or Data.Window.Icon or "",
-		Icon = self:GetIcon(Data.Window.Icon or Data.Window.Image or "") or "",
+		Icon = Data.Window.Icon or Data.Window.Image or "",
 		Size = Data.Window.Size or Data.Window.WindowSize or UDim2.fromOffset(425, 520),
 	})
 
@@ -126,7 +126,15 @@ function Library:GetIcon(IconName)
 	end
 
 	local Icon = Icons.Icon(tostring(IconName):lower())
-	assert(Icon and Icon[1] and Icon[2], "Invalid icon name: " .. tostring(IconName))
+	--// assert(Icon and Icon[1] and Icon[2], "Invalid icon name: " .. tostring(IconName))
+
+	if not Icon and not Icon[1] and not Icon[2] then
+		return {
+			Image = "",
+			ImageRectPosition = Vector2.new(0, 0),
+			ImageRectSize = Vector2.new(0, 0),
+		}
+	end
 
 	return {
 		Image = Icon[1],
