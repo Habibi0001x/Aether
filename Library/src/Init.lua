@@ -124,7 +124,7 @@ function Library:GetIcon(IconName) --// Credits: .ftgs for the icon Library
 		}
 	end
 
-	local Icon = Icons.Icon(string.lower(IconName))
+	local Icon = Icons.Icon(IconName)
 	print(type(Icon))
 
 	return {
