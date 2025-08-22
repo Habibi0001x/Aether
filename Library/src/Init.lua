@@ -114,8 +114,9 @@ function Library:Setup(Data)
 	return NavigationUI
 end
 
-function Library:GetIcon(IconName) --// Credits: .ftgs for the icon Library
+function Library:GetIcon(IconName)
 	assert(IconName, "No icon passed for 'GetIcon'")
+
 	if type(IconName) == "string" and IconName:find("rbxassetid") then
 		return {
 			Image = IconName,
@@ -124,7 +125,8 @@ function Library:GetIcon(IconName) --// Credits: .ftgs for the icon Library
 		}
 	end
 
-	local Icon = Icons.Icon(tostring(IconName:lower()))
+	local Icon = Icons.Icon(tostring(IconName):lower())
+	assert(Icon and Icon[1] and Icon[2], "Invalid icon name: " .. tostring(IconName))
 
 	return {
 		Image = Icon[1],
