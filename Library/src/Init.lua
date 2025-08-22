@@ -1,0 +1,143 @@
+local Library = {}
+Library.__index = Library
+
+if shared.Library then
+	shared.Library:Uninject()
+	shared.Library = Library
+end
+
+shared.Import = function(FileName) end
+
+--// Modules
+local NavigationModule = require(script.Parent:WaitForChild("Navigator"))
+local WindowModule = require(script.Parent:WaitForChild("Window"))
+local SignalHandler = require(script.Parent.Parent:WaitForChild("Handlers"):WaitForChild("SignalHandler"))
+local AnimationHandler = require(script.Parent.Parent:WaitForChild("Handlers"):WaitForChild("AnimationHandler"))
+local InstanceHandler = require(script.Parent.Parent:WaitForChild("Handlers"):WaitForChild("InstanceHandler"))
+
+--//TODO: add import
+
+--// Core
+Library.CloneRef = cloneref or function(Object)
+	assert(Object, "No object found for 'CloneRef'")
+	return Object
+end
+Library.ProtectGui = protectgui or (syn and syn.protect_gui) or function() end
+
+Library.Services = {
+	TweenService = Library.CloneRef(game:GetService("TweenService")) :: TweenService,
+	RunService = Library.CloneRef(game:GetService("RunService")) :: RunService,
+	Players = Library.CloneRef(game:GetService("Players")) :: Players,
+	UserInputService = Library.CloneRef(game:GetService("UserInputService")) :: UserInputService,
+	HttpService = Library.CloneRef(game:GetService("HttpService")) :: HttpService,
+}
+
+Library.Font = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal) --//TODO: add :ChangeFont
+
+Library.InstanceHandler = InstanceHandler
+Library.SignalHandler = SignalHandler
+Library.AnimationHandler = AnimationHandler
+
+--// Parent Setup
+local Services = Library.Services
+local Parent = nil
+
+if Services.RunService:IsStudio() then
+	Parent = Services.Players.LocalPlayer:WaitForChild("PlayerGui")
+else
+	Parent = gethui and gethui() or game:GetService("CoreGui")
+end
+
+assert(Parent, "Failed to get gui parent")
+Library.GUI = InstanceHandler:New("ScreenGui", {
+	Parent = Parent,
+	ResetOnSpawn = false,
+	IgnoreGuiInset = true,
+	Name = "Aether",
+	--// ZIndexBehaviour = Enum.ZIndexBehavior.Sibling,
+})
+
+Library.DropdownUI = InstanceHandler:New("Frame", {
+	Parent = Library.GUI,
+	Size = UDim2.new(1, 0, 1, 0),
+	BackgroundTransparency = 1,
+	Name = "DropdownUI",
+	ZIndex = 2,
+	Visible = true,
+})
+
+--// Methods
+function Library:Setup(Data)
+	if shared.NagivationBar then
+		shared.NagivationBar:Remove()
+	end
+
+	if shared.Window then
+		shared.Window:Remove()
+	end
+
+	local Navigator = NavigationModule.New(Library)
+	local Window = WindowModule.New(Library):Init({
+		Title = Data.Window.Title or Data.Window.Icon or "",
+		Icon = self:GetIcon(Data.Window.Icon or Data.Window.Image or "") or "",
+		Size = Data.Window.Size or Data.Window.WindowSize or UDim2.fromOffset(425, 520),
+	})
+
+	shared.Window = Window
+
+	local NavigationUI = Navigator:Init({
+		BarSection = Data.BarSection or Data.BarAligIconnt,
+		TagsSection = Data.TagsSection or Data.TagsAligIconnt,
+		MiscSection = Data.MiscSection or Data.MiscAligIconnt,
+	})
+
+	return NavigationUI
+end
+
+function Library:GetIcon(IconName) --// Credits: .ftgs for the icon Library
+	if not Services.RunService:IsStudio() then
+		local Succes, Result = pcall(function()
+			return HttpService:GetAsync("https://raw.githubusercontent.com/Footagesus/Icons/main/Main.lua")
+		end)
+
+		assert(Succes, "Failed to fetch Icons module: " .. tostring(Result))
+
+		local Icons = loadstring(Result)()
+		Icons.SetIconsType("lucide") --// Default
+
+		function Library:GetIcon(IconName) --// Credits: .ftgs for the icon Library
+			assert(IconName, "No icon passed for 'GetIcon'")
+			local Icon = Icons.Icon(string.lower(IconName))
+
+			return {
+				Image = Icon[1],
+				ImageRectSize = Icon[2].ImageRectSize,
+				ImageRectPosition = Icon[2].ImageRectPosition,
+			}
+		end
+	else
+		if type(IconName) == "string" and IconName:find("rbxassetid") then
+			return {
+				Image = IconName,
+				ImageRectPosition = Vector2.new(0, 0),
+				ImageRectSize = Vector2.new(0, 0),
+			}
+		end
+
+		return {
+			Image = "",
+			ImageRectPosition = Vector2.new(0, 0),
+			ImageRectSize = Vector2.new(0, 0),
+		}
+	end
+end
+
+function Library:Uninject()
+	SignalHandler:DisconnectAllSignals()
+	InstanceHandler:ClearInstances()
+	Library = nil
+end
+
+function Library:Notify(Data) end
+
+return Library
