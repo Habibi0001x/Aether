@@ -8,7 +8,7 @@
 **Aether** is a Roblox GUI library inspired by newer UI frameworks such as **WindUI** and **Fluent**.
 It is currently in **Beta** and actively being developed.
 
-👉 If you encounter issues or have suggestions, please DM me on Discord: **severitysvc**
+If you encounter issues or have suggestions, please DM me on Discord: **severitysvc**
 
 ---
 
@@ -46,7 +46,9 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sever
 
 ### Library
 
-#### `Library:Uninject()`
+```lua
+ Library:Uninject()
+```
 
 Cleans up and unloads Aether.
 
@@ -56,10 +58,13 @@ Cleans up and unloads Aether.
 
 ---
 
-#### `Library:Notify(options) -> Notification`
+```lua
+Library:Notify({Not scripted yet :p})
+```
 
 Creates a notification.
-⚠️ Currently **not functional** (pending `notification.lua`).
+> [!WARNING]
+> ⚠️ Currently **not functional** (pending `notification.lua`).
 
 ```lua
 local Notification = Library:Notify({
@@ -67,9 +72,10 @@ local Notification = Library:Notify({
     Content = "Hello world",
     Duration = 3
 })
+--// Desired Creation
 ```
 
-##### Notification Methods
+##### Desired Notification Methods
 
 * `Notification:Remove()` → Destroys the notification.
 * `Notification:Queue()` → Queues the notification until `:Show()` is called.
@@ -77,25 +83,18 @@ local Notification = Library:Notify({
 
 ---
 
-#### `Library:SetIconLibrary(libraryName)`
+```lua
+ Library:SetIconLibrary(libraryName)
+```
 
 Sets the active icon library.
 
 * Default: `"lucide"`
-* Supported: `{ "lucide", "craft" }` (see [.ftgs/Icons](https://github.com/Footagesus))
-
-Example:
-
-```lua
-Library:SetIconLibrary("lucide")
-```
+* Supported: `{ "lucide", "craft" }` (see [.ftgs/Icons](https://github.com/Footagesus/Icons))
 
 ---
 
 ### Navigator
-
-#### `Library:Setup(options) -> Navigator`
-
 Initializes the main window and navigation bar.
 
 ```lua
@@ -113,10 +112,7 @@ local Navigator = Library:Setup({
 
 ---
 
-#### `Navigator:CreateTab(options) -> Tab`
-
-Creates a new tab in the navigation bar.
-
+### Creating Tabs
 Example using Roblox AssetId:
 
 ```lua
@@ -138,17 +134,19 @@ local Tab = Navigator:CreateTab({
 ---
 
 ### Tab Elements
-I will add more elements with each update
+> I will add more elements with each update {eg: Paragraphs, ColorPickers, Inputs}
+> Note: when "" is used, it means the element will not be visible {eg: if a Description is set to nil or "" then it wont show}
+
 
 #### Toggles
 
 ```lua
 Tab:CreateToggle({
-	Title = "Toggle Example",
-	Description = "This is a toggle",
-	Default = false,
-	Callback = function(state)
-		print(state)
+	Title = "Toggle Example", --// Default: ""
+	Description = "This is a toggle", --// Default: ""
+	Default = false, --// Default: false
+	Callback = function(State)
+		print(State)
 	end,
 })
 ```
@@ -157,9 +155,9 @@ Tab:CreateToggle({
 
 ```lua
 Tab:CreateButton({
-	Title = "Button Example",
-	Icon = "clock",
-	Description = "This is a button",
+	Title = "Button Example", --// Default: ""
+	Icon = "clock", --// Default: ""
+	Description = "This is a button", --// Default: ""
 	Callback = function()
 		print("Button clicked")
 	end,
@@ -188,15 +186,17 @@ Tab:CreateDropdown({
 
 ```lua
 Tab:CreateSlider({
-	Title = "Slider Example",
-	Description = "This is a slider",
-	Min = 10,
-	Max = 100,
-	Step = 1,
-	Default = 50,
+	Title = "Slider Example",--// Default: ""
+	Description = "This is a slider",--// Default: ""
+	Min = 10,--// Default: 0
+	Max = 100,--// Default: 100
+	Step = 1,--// Default: 1
+	Default = 50,--// Default: Min 
 	Callback = function(value)
 		print(value)
 	end,
 })
 ```
+
+
 
