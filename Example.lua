@@ -1,15 +1,17 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Severity-svc2/Aether/refs/heads/main/Library/src/Init.lua"))()
+local Library = loadstring(
+	game:HttpGet("https://raw.githubusercontent.com/Severity-svc2/Aether/refs/heads/main/Library/src/Init.lua")
+)()
 
 local Navigator = Library:Setup({
 	Window = {
-		Title = "Aether Window Example",
-		Logo = "user",
-		Size = nil, --// Default: offset 425, 520
+		Title = "Aether Window Example", --// Default: ""
+		Logo = "user", --//Default: none
+		Size = UDim2.fromOffset(425, 520), --// Default: offset 425, 520
 	},
 
-	BarSection = "Center",
-	TagsSection = "Right",
-	MiscSection = "Left",
+	BarSection = "Center", --//Default: Center
+	TagsSection = "Right", --//Default:  Left
+	MiscSection = "Left", --//Default: Left
 })
 
 local CombatTab = Navigator:CreateTab({

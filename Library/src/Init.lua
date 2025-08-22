@@ -36,6 +36,9 @@ local WindowModule = Import("src/components/Window")
 local SignalHandler = Import("build/SignalHandler")
 local AnimationHandler = Import("build/AnimationHandler")
 local InstanceHandler = Import("build/InstanceHandler")
+local Icons = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/main/Main.lua"))() --// Creds: .ftgs
+
+assert(Succes, "Failed to fetch Icons module: " .. tostring(Result))
 
 --//TODO: add import
 
@@ -118,12 +121,6 @@ end
 
 function Library:GetIcon(IconName) --// Credits: .ftgs for the icon Library
 	if not Services.RunService:IsStudio() then
-		local Succes, Result = pcall(function()
-			return HttpService:GetAsync("https://raw.githubusercontent.com/Footagesus/Icons/main/Main.lua")
-		end)
-
-		assert(Succes, "Failed to fetch Icons module: " .. tostring(Result))
-
 		local Icons = loadstring(Result)()
 		Icons.SetIconsType("lucide") --// Default
 
@@ -161,5 +158,9 @@ function Library:Uninject()
 end
 
 function Library:Notify(Data) end
+
+function Library:SetIconLibrary(Library)
+	Icons.SetIconsType("lucide")
+end
 
 return Library
