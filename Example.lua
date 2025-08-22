@@ -1,4 +1,4 @@
-local Library = require(script.Parent:WaitForChild("Init"))
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Severity-svc2/Aether/refs/heads/main/Library/src/Init.lua"))()
 
 local Navigator = Library:Setup({
 	Window = {
