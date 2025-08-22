@@ -8,7 +8,7 @@ function Window.New(Library)
 	Self.Resizable = false
 	Self.Body = nil
 	Self.BodyCollection = {}
-	Self.DefaultSize = UDim2.new(0, 425, 0, 520)
+	Self.DefaultSize = UDim2.new(0, 520, 0, 480)
 
 	return Self
 end
