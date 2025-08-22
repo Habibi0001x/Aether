@@ -34,6 +34,7 @@ local SignalHandler = Import("build/SignalHandler")
 local AnimationHandler = Import("build/AnimationHandler")
 local InstanceHandler = Import("build/InstanceHandler")
 local Icons = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/main/Main.lua"))() --// Creds: .ftgs
+Icons:SetIconsType("lucide")
 
 --// Core
 Library.CloneRef = cloneref or function(Object)
