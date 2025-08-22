@@ -6,14 +6,36 @@ if shared.Library then
 	shared.Library = Library
 end
 
-shared.Import = function(FileName) end
+shared.Import = function(FileName, Extension)
+	local BaseURL = "https://raw.githubusercontent.com/Severity-svc2/Aether/refs/heads/main/Library/"
+	local FileExtension = Extension or ".lua"
+
+	local Path = BaseURL .. FileName .. Extension
+
+	local Success, Response = pcall(function()
+		return game:HttpGet(Path)
+	end)
+
+	if Success and Response then
+		if Response:find("<html>") then
+			error("invalid response: " .. Path)
+		end
+
+		return loadstring(Response)()
+	else
+		error("failed to fetch file " .. Path)
+	end
+end
+
+local Import = shared.Import
+Library.Import = Import
 
 --// Modules
-local NavigationModule = require(script.Parent:WaitForChild("Navigator"))
-local WindowModule = require(script.Parent:WaitForChild("Window"))
-local SignalHandler = require(script.Parent.Parent:WaitForChild("Handlers"):WaitForChild("SignalHandler"))
-local AnimationHandler = require(script.Parent.Parent:WaitForChild("Handlers"):WaitForChild("AnimationHandler"))
-local InstanceHandler = require(script.Parent.Parent:WaitForChild("Handlers"):WaitForChild("InstanceHandler"))
+local NavigationModule = Import("src/components/Navigator")
+local WindowModule = Import("src/components/Window")
+local SignalHandler = Import("build/SignalHandler")
+local AnimationHandler = Import("build/AnimationHandler")
+local InstanceHandler = Import("build/InstanceHandler")
 
 --//TODO: add import
 

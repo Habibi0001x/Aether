@@ -1,10 +1,4 @@
-local Themes = {
-	["Starfall"] = {},
-
-	["Light"] = {},
-
-	["Violet"] = {},
-}
+local Themes = {}
 
 --//TODO: add themes
 

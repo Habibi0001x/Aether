@@ -2,8 +2,6 @@ local Handler = {}
 Handler.__index = Handler
 Handler.ActiveConnections = {}
 
-local InstanceHandler = require(script.Parent:WaitForChild("InstanceHandler"))
-
 function Handler:NewSignal(Instance, EventName, Callback)
 	assert(Instance, "No passed Instance for 'NewSignal'")
 	local Event = Instance[EventName]
@@ -17,12 +15,11 @@ function Handler:NewSignal(Instance, EventName, Callback)
 end
 
 function Handler:NewClickSignal(Instance, Callback)
-	local Button = InstanceHandler:New("TextButton", {
-		Parent = Instance,
-		Size = UDim2.new(1, 0, 1, 0),
-		BackgroundTransparency = 1,
-		Text = "",
-	})
+	local Button = Instance.new("TextButton")
+	Button.Parent = Instance
+	Button.Size = UDim2.new(1, 0, 1, 0)
+	Button.BackgroundTransparency = 1
+	Button.Text = ""
 
 	self:NewSignal(Button, "MouseButton1Click", Callback)
 end

@@ -22,10 +22,10 @@ function Window:Init(DataEnd)
 	local AnimHandler = Library.AnimationHandler
 
 	--// Element Modules
-	local ToggleModule = require(script.Parent.Parent:WaitForChild("Elements"):WaitForChild("Toggle"))
-	local ButtonModule = require(script.Parent.Parent:WaitForChild("Elements"):WaitForChild("Button"))
-	local SliderModule = require(script.Parent.Parent:WaitForChild("Elements"):WaitForChild("Slider"))
-	local DropdownModule = require(script.Parent.Parent:WaitForChild("Elements"):WaitForChild("Dropdown"))
+	local ToggleModule = Library.Import("src/elements/Toggle")
+	local ButtonModule = Library.Import("src/elements/Button")
+	local SliderModule = Library.Import("src/elements/Slider")
+	local DropdownModule = Library.Import("src/elements/Dropdown")
 
 	assert(SignalHandler, "No signal handler found for 'Init'")
 	assert(AnimHandler, "No animation handler found for 'Init'")
