@@ -114,35 +114,22 @@ function Library:Setup(Data)
 end
 
 function Library:GetIcon(IconName) --// Credits: .ftgs for the icon Library
-	if not Services.RunService:IsStudio() then
-		local Icons = loadstring(Result)()
-		Icons.SetIconsType("lucide") --// Default
-
-		function Library:GetIcon(IconName) --// Credits: .ftgs for the icon Library
-			assert(IconName, "No icon passed for 'GetIcon'")
-			local Icon = Icons.Icon(string.lower(IconName))
-
-			return {
-				Image = Icon[1],
-				ImageRectSize = Icon[2].ImageRectSize,
-				ImageRectPosition = Icon[2].ImageRectPosition,
-			}
-		end
-	else
-		if type(IconName) == "string" and IconName:find("rbxassetid") then
-			return {
-				Image = IconName,
-				ImageRectPosition = Vector2.new(0, 0),
-				ImageRectSize = Vector2.new(0, 0),
-			}
-		end
-
+	assert(IconName, "No icon passed for 'GetIcon'")
+	if type(IconName) == "string" and IconName:find("rbxassetid") then
 		return {
-			Image = "",
+			Image = IconName,
 			ImageRectPosition = Vector2.new(0, 0),
 			ImageRectSize = Vector2.new(0, 0),
 		}
 	end
+
+	local Icon = Icons.Icon(string.lower(IconName))
+
+	return {
+		Image = Icon[1],
+		ImageRectSize = Icon[2].ImageRectSize,
+		ImageRectPosition = Icon[2].ImageRectPosition,
+	}
 end
 
 function Library:Uninject()
