@@ -213,6 +213,8 @@ function Button:Init(Data)
 	end)
 
 	return {
+		Callback,
+
 		SetDescription = function(_, Text)
 			Description.Text = Text
 		end,

@@ -176,7 +176,7 @@ function NavigationEnd:Init(EndData)
 
 		local WindowContext = Window:NewContext({
 			Title = Data.Title or Data.Name or "unnamed",
-			SearchBarEnabled = true,
+			SearchBarEnabled = Data.SearchBarEnabled,
 		})
 
 		local Tab_1 = Instance.new("ImageButton")

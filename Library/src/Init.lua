@@ -47,7 +47,8 @@ Library.CloneRef = cloneref or function(Object)
 	assert(Object, "No object found for 'CloneRef'")
 	return Object
 end
-Library.ProtectGui = protectgui or (syn and syn.protect_gui) or function() end
+
+Library.ProtectGui = protectgui or function() end
 
 Library.Services = {
 	TweenService = Library.CloneRef(game:GetService("TweenService")) :: TweenService,
@@ -160,7 +161,7 @@ end
 function Library:Notify(Data) end
 
 function Library:SetIconLibrary(Library)
-	Icons.SetIconsType("lucide")
+	Icons.SetIconsType(Library)
 end
 
 return Library

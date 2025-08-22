@@ -271,6 +271,9 @@ function Toggle:Init(Data)
 	end)
 
 	return {
+		Callback,
+		Value = Bool,
+
 		SetDescription = function(_, Text)
 			Description_1.Text = Text
 		end,

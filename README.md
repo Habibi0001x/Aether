@@ -12,27 +12,25 @@ If you encounter issues or have suggestions, please DM me on Discord: **severity
 
 ---
 
-## 🔔 Note
+##  Note
 
 * Aether is in **Beta**. Expect breaking changes.
 * Some features are **not fully implemented yet** (see API notes).
 
 ---
 
-## 🙌 Credits
+##  Credits
 
 * **[.ftgs](https://github.com/Footagesus)** → Icon library
 
 ---
 
-## 🌐 Socials
+##  Socials
 
 * [Discord Server](https://discord.gg/cdGfgsaD5b)
 * [YouTube Channel](https://www.youtube.com/@Severity-Svc)
 
 ---
-
-## 🚀 Getting Started
 
 ### Booting the Library
 
@@ -141,7 +139,7 @@ local Tab = Navigator:CreateTab({
 #### Toggles
 
 ```lua
-Tab:CreateToggle({
+local Toggle = Tab:CreateToggle({
 	Title = "Toggle Example", --// Default: ""
 	Description = "This is a toggle", --// Default: ""
 	Default = false, --// Default: false
@@ -151,10 +149,17 @@ Tab:CreateToggle({
 })
 ```
 
+## Methods
+
+* `Toggle:SetDesc("Hello World")` → Sets the description of the specified toggle to the text param.
+* `Toggle:SetTitle("Hello World")` → Sets the Title of the specified toggle to the text param.
+* `Toggle:Set(true)` → calls the callback function and animates the toggle without needing to click anymore
+
+
 #### Buttons
 
 ```lua
-Tab:CreateButton({
+locak Button = Tab:CreateButton({
 	Title = "Button Example", --// Default: ""
 	Icon = "clock", --// Default: ""
 	Description = "This is a button", --// Default: ""
@@ -164,10 +169,16 @@ Tab:CreateButton({
 })
 ```
 
+## Methods
+
+* `Button:SetDesc("Hello World")` → Sets the description of the specified Button to the text param.
+* `Button:SetTitle("Hello World")` → Sets the Title of the specified Button to the text param.
+* `Button:Callback()` → calls the callback function without needing to click anymore ( not sure if anyone needs this but yes )
+
 #### Dropdowns
 
 ```lua
-Tab:CreateDropdown({
+local Dropdown = Tab:CreateDropdown({
 	Title = "Dropdown Example",
 	Description = "Choose a value",
 	Values = { "Option1", "Option2", "Option3" },
@@ -182,10 +193,18 @@ Tab:CreateDropdown({
 })
 ```
 
+> [!WARNING]
+> ⚠️ The Dropdown automatically updates. if you want it to change then set the Values to a table variable and change that table.
+
+* `Dropdown:SetDesc("Hello World")` → Sets the description of the specified Button to the text param.
+* `Dropdown:SetTitle("Hello World")` → Sets the Title of the specified Button to the text param.
+* `(In the Future) Dropdown:Select()` → calls the callback function without needing to click anymore ( not sure if anyone needs this but yes )
+
+
 #### Sliders
 
 ```lua
-Tab:CreateSlider({
+local Slider = Tab:CreateSlider({
 	Title = "Slider Example",--// Default: ""
 	Description = "This is a slider",--// Default: ""
 	Min = 10,--// Default: 0

@@ -504,6 +504,13 @@ function Dropdown:Init(Data)
 	end)
 
 	return {
+		Callback,
+		Value = Selected,
+		AllowNone,
+		Values,
+		Multi,
+		Shadow,
+
 		SetDescription = function(_, Text)
 			Description_1.Text = Text
 		end,
